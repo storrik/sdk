@@ -22,16 +22,17 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Storrik from 'storrik';
 
-const client = new Storrik();
-
-const checkout = await client.checkout.create({
-  store_id: 'store_123',
-  crypto_asset: 'BTC',
-  method: 'crypto',
-  product_id: 'prod_123',
+const client = new Storrik({
+  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
 });
 
-console.log(checkout.id);
+const checkoutResponse = await client.checkout.create({
+  product_id: 'prod_123',
+  crypto_asset: 'BTC',
+  method: 'crypto',
+});
+
+console.log(checkoutResponse.success);
 ```
 
 ### Request & Response types
@@ -42,17 +43,18 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Storrik from 'storrik';
 
-const client = new Storrik();
+const client = new Storrik({
+  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
+});
 
 const params: Storrik.CheckoutCreateParams = {
-  store_id: 'store_123',
+  product_id: 'prod_123',
   cancel_url: 'https://yourapp.com/cancel',
   email: 'customer@example.com',
   method: 'card',
-  product_id: 'prod_123',
   success_url: 'https://yourapp.com/success',
 };
-const checkout: Storrik.CheckoutCreateResponse = await client.checkout.create(params);
+const checkoutResponse: Storrik.CheckoutResponse = await client.checkout.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -65,13 +67,12 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const checkout = await client.checkout
+const checkoutResponse = await client.checkout
   .create({
-    store_id: 'store_123',
+    product_id: 'prod_123',
     cancel_url: 'https://yourapp.com/cancel',
     email: 'customer@example.com',
     method: 'card',
-    product_id: 'prod_123',
     success_url: 'https://yourapp.com/success',
   })
   .catch(async (err) => {
@@ -110,12 +111,11 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Storrik({
-  apiKey: 'My API Key',
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.checkout.create({ store_id: 'store_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', product_id: 'prod_123', success_url: 'https://yourapp.com/success' }, {
+await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', success_url: 'https://yourapp.com/success' }, {
   maxRetries: 5,
 });
 ```
@@ -128,12 +128,11 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Storrik({
-  apiKey: 'My API Key',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.checkout.create({ store_id: 'store_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', product_id: 'prod_123', success_url: 'https://yourapp.com/success' }, {
+await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', success_url: 'https://yourapp.com/success' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -158,29 +157,27 @@ const client = new Storrik();
 
 const response = await client.checkout
   .create({
-    store_id: 'store_123',
+    product_id: 'prod_123',
     cancel_url: 'https://yourapp.com/cancel',
     email: 'customer@example.com',
     method: 'card',
-    product_id: 'prod_123',
     success_url: 'https://yourapp.com/success',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: checkout, response: raw } = await client.checkout
+const { data: checkoutResponse, response: raw } = await client.checkout
   .create({
-    store_id: 'store_123',
+    product_id: 'prod_123',
     cancel_url: 'https://yourapp.com/cancel',
     email: 'customer@example.com',
     method: 'card',
-    product_id: 'prod_123',
     success_url: 'https://yourapp.com/success',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(checkout.id);
+console.log(checkoutResponse.success);
 ```
 
 ### Logging
