@@ -302,13 +302,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['STORRIK_BASE_URL'] = ''; // empty
       const client = new Storrik({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://petstore3.swagger.io/api/v3');
+      expect(client.baseURL).toEqual('https://api.storrik.io');
     });
 
     test('blank env variable', () => {
       process.env['STORRIK_BASE_URL'] = '  '; // blank
       const client = new Storrik({ apiKey: 'My API Key' });
-      expect(client.baseURL).toEqual('https://petstore3.swagger.io/api/v3');
+      expect(client.baseURL).toEqual('https://api.storrik.io');
     });
 
     test('in request options', () => {
@@ -413,14 +413,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['PETSTORE_API_KEY'] = 'My API Key';
+    process.env['STORRIK_API_KEY'] = 'My API Key';
     const client = new Storrik();
     expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['PETSTORE_API_KEY'] = 'another My API Key';
+    process.env['STORRIK_API_KEY'] = 'another My API Key';
     const client = new Storrik({ apiKey: 'My API Key' });
     expect(client.apiKey).toBe('My API Key');
   });
