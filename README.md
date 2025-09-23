@@ -4,18 +4,15 @@
 
 This library provides convenient access to the Storrik REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.storrik.io](https://docs.storrik.io/). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/storrik-typescript.git
+npm install storrik
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install storrik`
 
 ## Usage
 
@@ -26,12 +23,16 @@ The full API of this library can be found in [api.md](api.md).
 import Storrik from 'storrik';
 
 const client = new Storrik({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
 });
 
-const order = await client.store.order.create({ petId: 1, quantity: 1, status: 'placed' });
+const checkoutResponse = await client.checkout.create({
+  product_id: 'prod_123',
+  crypto_asset: 'BTC',
+  method: 'crypto',
+});
 
-console.log(order.id);
+console.log(checkoutResponse.success);
 ```
 
 ### Request & Response types
@@ -43,10 +44,17 @@ This library includes TypeScript definitions for all request params and response
 import Storrik from 'storrik';
 
 const client = new Storrik({
-  apiKey: process.env['PETSTORE_API_KEY'], // This is the default and can be omitted
+  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
 });
 
-const response: Storrik.StoreListInventoryResponse = await client.store.listInventory();
+const params: Storrik.CheckoutCreateParams = {
+  product_id: 'prod_123',
+  cancel_url: 'https://yourapp.com/cancel',
+  email: 'customer@example.com',
+  method: 'card',
+  success_url: 'https://yourapp.com/success',
+};
+const checkoutResponse: Storrik.CheckoutResponse = await client.checkout.create(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,15 +67,23 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.store.listInventory().catch(async (err) => {
-  if (err instanceof Storrik.APIError) {
-    console.log(err.status); // 400
-    console.log(err.name); // BadRequestError
-    console.log(err.headers); // {server: 'nginx', ...}
-  } else {
-    throw err;
-  }
-});
+const checkoutResponse = await client.checkout
+  .create({
+    product_id: 'prod_123',
+    cancel_url: 'https://yourapp.com/cancel',
+    email: 'customer@example.com',
+    method: 'card',
+    success_url: 'https://yourapp.com/success',
+  })
+  .catch(async (err) => {
+    if (err instanceof Storrik.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 ```
 
 Error codes are as follows:
@@ -99,7 +115,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.store.listInventory({
+await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', success_url: 'https://yourapp.com/success' }, {
   maxRetries: 5,
 });
 ```
@@ -116,7 +132,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.store.listInventory({
+await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', success_url: 'https://yourapp.com/success' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -139,13 +155,29 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Storrik();
 
-const response = await client.store.listInventory().asResponse();
+const response = await client.checkout
+  .create({
+    product_id: 'prod_123',
+    cancel_url: 'https://yourapp.com/cancel',
+    email: 'customer@example.com',
+    method: 'card',
+    success_url: 'https://yourapp.com/success',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.store.listInventory().withResponse();
+const { data: checkoutResponse, response: raw } = await client.checkout
+  .create({
+    product_id: 'prod_123',
+    cancel_url: 'https://yourapp.com/cancel',
+    email: 'customer@example.com',
+    method: 'card',
+    success_url: 'https://yourapp.com/success',
+  })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response);
+console.log(checkoutResponse.success);
 ```
 
 ### Logging
@@ -225,7 +257,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.store.order.create({
+client.checkout.create({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
@@ -335,7 +367,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/storrik-typescript/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/storrik/sdk/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
