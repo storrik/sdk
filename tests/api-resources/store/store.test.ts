@@ -8,7 +8,7 @@ const client = new Storrik({
 });
 
 describe('resource store', () => {
-  // skipped: tests are disabled for the time being
+  // Prism tests are disabled
   test.skip('listInventory', async () => {
     const responsePromise = client.store.listInventory();
     const rawResponse = await responsePromise.asResponse();
