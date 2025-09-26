@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "storrik/*": ["dist/src/*"],
-      "storrik": ["dist/src/index.ts"]
+      "storrik/*": ["./dist/src/*"],
+      "storrik": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,
