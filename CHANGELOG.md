@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.1.0 (2025-09-27)
+
+Full Changelog: [v1.0.0...v1.1.0](https://github.com/storrik/sdk/compare/v1.0.0...v1.1.0)
+
+### Features
+
+* **api:** manual updates ([0b45ecb](https://github.com/storrik/sdk/commit/0b45ecb116ab0bb8def2187d4a4521066db37b19))
+
+
+### Performance Improvements
+
+* faster formatting ([21ae414](https://github.com/storrik/sdk/commit/21ae414ec270c34d83e579d8246f28fe154a8e02))
+
+
+### Chores
+
+* **internal:** codegen related update ([614bccd](https://github.com/storrik/sdk/commit/614bccd34c0d4cc1d535334a039bbecd7a9e7dee))
+* **internal:** fix incremental formatting in some cases ([7fd5ec9](https://github.com/storrik/sdk/commit/7fd5ec917871b576b197410c7148e4a16ed66795))
+* **internal:** ignore .eslintcache ([908a232](https://github.com/storrik/sdk/commit/908a2328ddce39542f39bee10c27fd0e76f7a375))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([2493811](https://github.com/storrik/sdk/commit/24938113c6c2c11d9ab7cc97aa1a5f0a67d07ea2))
+
 ## 1.0.0 (2025-09-23)
 
 Full Changelog: [v0.0.1-alpha.0...v1.0.0](https://github.com/storrik/sdk/compare/v0.0.1-alpha.0...v1.0.0)
