@@ -7,6 +7,13 @@ import { RequestOptions } from '../internal/request-options';
 export class Checkout extends APIResource {
   /**
    * Creates a checkout for a store product or custom amount.
+   *
+   * @example
+   * ```ts
+   * const checkoutResponse = await client.checkout.create({
+   *   product_id: 'PROD_FOO',
+   * });
+   * ```
    */
   create(body: CheckoutCreateParams, options?: RequestOptions): APIPromise<CheckoutResponse> {
     return this._client.post('/v1/checkout', { body, ...options });

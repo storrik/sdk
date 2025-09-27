@@ -32,11 +32,6 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['STORRIK_API_KEY'].
-   */
-  apiKey?: string | undefined;
-
-  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['STORRIK_BASE_URL'].
@@ -109,8 +104,6 @@ export interface ClientOptions {
  * API Client for interfacing with the Storrik API.
  */
 export class Storrik {
-  apiKey: string;
-
   baseURL: string;
   maxRetries: number;
   timeout: number;
@@ -126,7 +119,6 @@ export class Storrik {
   /**
    * API Client for interfacing with the Storrik API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['STORRIK_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['STORRIK_BASE_URL'] ?? https://api.storrik.io] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -135,19 +127,8 @@ export class Storrik {
    * @param {HeadersLike} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({
-    baseURL = readEnv('STORRIK_BASE_URL'),
-    apiKey = readEnv('STORRIK_API_KEY'),
-    ...opts
-  }: ClientOptions = {}) {
-    if (apiKey === undefined) {
-      throw new Errors.StorrikError(
-        "The STORRIK_API_KEY environment variable is missing or empty; either provide it, or instantiate the Storrik client with an apiKey option, like new Storrik({ apiKey: 'My API Key' }).",
-      );
-    }
-
+  constructor({ baseURL = readEnv('STORRIK_BASE_URL'), ...opts }: ClientOptions = {}) {
     const options: ClientOptions = {
-      apiKey,
       ...opts,
       baseURL: baseURL || `https://api.storrik.io`,
     };
@@ -168,8 +149,6 @@ export class Storrik {
     this.#encoder = Opts.FallbackEncoder;
 
     this._options = options;
-
-    this.apiKey = apiKey;
   }
 
   /**
@@ -185,7 +164,6 @@ export class Storrik {
       logLevel: this.logLevel,
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
-      apiKey: this.apiKey,
       ...options,
     });
     return client;
@@ -204,10 +182,6 @@ export class Storrik {
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
     return;
-  }
-
-  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: this.apiKey }]);
   }
 
   /**
@@ -647,7 +621,6 @@ export class Storrik {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
