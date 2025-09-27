@@ -22,9 +22,7 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Storrik from 'storrik';
 
-const client = new Storrik({
-  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
-});
+const client = new Storrik();
 
 const checkoutResponse = await client.checkout.create({
   product_id: 'prod_123',
@@ -43,16 +41,14 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Storrik from 'storrik';
 
-const client = new Storrik({
-  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
-});
+const client = new Storrik();
 
 const params: Storrik.CheckoutCreateParams = {
   product_id: 'prod_123',
-  cancel_url: 'https://yourapp.com/cancel',
-  email: 'customer@example.com',
+  cancel_url: 'https://foo.bar/cancel',
+  email: 'customer@foo.bar',
   method: 'card',
-  success_url: 'https://yourapp.com/success',
+  success_url: 'https://foo.bar/success',
 };
 const checkoutResponse: Storrik.CheckoutResponse = await client.checkout.create(params);
 ```
@@ -70,10 +66,10 @@ a subclass of `APIError` will be thrown:
 const checkoutResponse = await client.checkout
   .create({
     product_id: 'prod_123',
-    cancel_url: 'https://yourapp.com/cancel',
-    email: 'customer@example.com',
+    cancel_url: 'https://foo.bar/cancel',
+    email: 'customer@foo.bar',
     method: 'card',
-    success_url: 'https://yourapp.com/success',
+    success_url: 'https://foo.bar/success',
   })
   .catch(async (err) => {
     if (err instanceof Storrik.APIError) {
@@ -115,7 +111,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', success_url: 'https://yourapp.com/success' }, {
+await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://foo.bar/cancel', email: 'customer@foo.bar', method: 'card', success_url: 'https://foo.bar/success' }, {
   maxRetries: 5,
 });
 ```
@@ -132,7 +128,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://yourapp.com/cancel', email: 'customer@example.com', method: 'card', success_url: 'https://yourapp.com/success' }, {
+await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://foo.bar/cancel', email: 'customer@foo.bar', method: 'card', success_url: 'https://foo.bar/success' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -158,10 +154,10 @@ const client = new Storrik();
 const response = await client.checkout
   .create({
     product_id: 'prod_123',
-    cancel_url: 'https://yourapp.com/cancel',
-    email: 'customer@example.com',
+    cancel_url: 'https://foo.bar/cancel',
+    email: 'customer@foo.bar',
     method: 'card',
-    success_url: 'https://yourapp.com/success',
+    success_url: 'https://foo.bar/success',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -170,10 +166,10 @@ console.log(response.statusText); // access the underlying Response object
 const { data: checkoutResponse, response: raw } = await client.checkout
   .create({
     product_id: 'prod_123',
-    cancel_url: 'https://yourapp.com/cancel',
-    email: 'customer@example.com',
+    cancel_url: 'https://foo.bar/cancel',
+    email: 'customer@foo.bar',
     method: 'card',
-    success_url: 'https://yourapp.com/success',
+    success_url: 'https://foo.bar/success',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
