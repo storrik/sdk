@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.2.0 (2025-10-12)
+
+Full Changelog: [v1.1.0...v1.2.0](https://github.com/storrik/sdk/compare/v1.1.0...v1.2.0)
+
+### Features
+
+* **api:** manual updates ([c4d3894](https://github.com/storrik/sdk/commit/c4d3894b9f0aad346b9579caf503423bf70495fa))
+
+
+### Chores
+
+* **internal:** remove .eslintcache ([64abfd1](https://github.com/storrik/sdk/commit/64abfd1726ead9f327ce05da69d410866fe7efbf))
+* **internal:** use npm pack for build uploads ([c832a27](https://github.com/storrik/sdk/commit/c832a27e3cc6ee5052d5c001f043e55d10f71556))
+* **jsdoc:** fix [@link](https://github.com/link) annotations to refer only to parts of the package‘s public interface ([d081ed6](https://github.com/storrik/sdk/commit/d081ed61d460b92f980167d6ace6b82bf0b4111c))
+
 ## 1.1.0 (2025-09-27)
 
 Full Changelog: [v1.0.0...v1.1.0](https://github.com/storrik/sdk/compare/v1.0.0...v1.1.0)
