@@ -17,6 +17,13 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { Checkout, CheckoutCreateParams, CheckoutRequest, CheckoutResponse } from './resources/checkout';
+import {
+  OrderVerifyParams,
+  Orders,
+  VerifyOrderError,
+  VerifyOrderRequest,
+  VerifyOrderResponse,
+} from './resources/orders';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -688,9 +695,11 @@ export class Storrik {
   static toFile = Uploads.toFile;
 
   checkout: API.Checkout = new API.Checkout(this);
+  orders: API.Orders = new API.Orders(this);
 }
 
 Storrik.Checkout = Checkout;
+Storrik.Orders = Orders;
 
 export declare namespace Storrik {
   export type RequestOptions = Opts.RequestOptions;
@@ -700,5 +709,13 @@ export declare namespace Storrik {
     type CheckoutRequest as CheckoutRequest,
     type CheckoutResponse as CheckoutResponse,
     type CheckoutCreateParams as CheckoutCreateParams,
+  };
+
+  export {
+    Orders as Orders,
+    type VerifyOrderError as VerifyOrderError,
+    type VerifyOrderRequest as VerifyOrderRequest,
+    type VerifyOrderResponse as VerifyOrderResponse,
+    type OrderVerifyParams as OrderVerifyParams,
   };
 }
