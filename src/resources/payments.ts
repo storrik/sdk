@@ -6,8 +6,8 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Payments extends APIResource {
   /**
-   * Creates a **Payment Intent**, representing a pending charge for a product or
-   * custom amount.
+   * Creates a **Payment Intent**, representing a charge for a product or custom
+   * amount.
    * Depending on `type`, the response will include either:
    *
    * - a `client_secret` for client-side confirmation (`embed` mode), or
