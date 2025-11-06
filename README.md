@@ -24,13 +24,16 @@ import Storrik from 'storrik';
 
 const client = new Storrik();
 
-const checkoutResponse = await client.checkout.create({
-  product_id: 'prod_123',
-  crypto_asset: 'BTC',
-  method: 'crypto',
+const response = await client.payments.createIntent({
+  amount: 2500,
+  currency: 'usd',
+  description: 'foo bar',
+  email: 'foo@bar.com',
+  productId: 'prod_456',
+  storeId: 'store_123',
+  success_url: 'https://foo.bar/success',
+  type: 'hosted',
 });
-
-console.log(checkoutResponse.success);
 ```
 
 ### Request & Response types
@@ -43,14 +46,17 @@ import Storrik from 'storrik';
 
 const client = new Storrik();
 
-const params: Storrik.CheckoutCreateParams = {
-  product_id: 'prod_123',
-  cancel_url: 'https://foo.bar/cancel',
-  email: 'customer@foo.bar',
-  method: 'card',
+const params: Storrik.PaymentCreateIntentParams = {
+  amount: 2500,
+  currency: 'usd',
+  description: 'foo bar',
+  email: 'foo@bar.com',
+  productId: 'prod_456',
+  storeId: 'store_123',
   success_url: 'https://foo.bar/success',
+  type: 'embed',
 };
-const checkoutResponse: Storrik.CheckoutResponse = await client.checkout.create(params);
+const response: Storrik.PaymentCreateIntentResponse = await client.payments.createIntent(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -63,13 +69,16 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const checkoutResponse = await client.checkout
-  .create({
-    product_id: 'prod_123',
-    cancel_url: 'https://foo.bar/cancel',
-    email: 'customer@foo.bar',
-    method: 'card',
+const response = await client.payments
+  .createIntent({
+    amount: 2500,
+    currency: 'usd',
+    description: 'foo bar',
+    email: 'foo@bar.com',
+    productId: 'prod_456',
+    storeId: 'store_123',
     success_url: 'https://foo.bar/success',
+    type: 'embed',
   })
   .catch(async (err) => {
     if (err instanceof Storrik.APIError) {
@@ -111,7 +120,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://foo.bar/cancel', email: 'customer@foo.bar', method: 'card', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'usd', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success', type: 'embed' }, {
   maxRetries: 5,
 });
 ```
@@ -128,7 +137,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.checkout.create({ product_id: 'prod_123', cancel_url: 'https://foo.bar/cancel', email: 'customer@foo.bar', method: 'card', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'usd', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success', type: 'embed' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -151,29 +160,35 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Storrik();
 
-const response = await client.checkout
-  .create({
-    product_id: 'prod_123',
-    cancel_url: 'https://foo.bar/cancel',
-    email: 'customer@foo.bar',
-    method: 'card',
+const response = await client.payments
+  .createIntent({
+    amount: 2500,
+    currency: 'usd',
+    description: 'foo bar',
+    email: 'foo@bar.com',
+    productId: 'prod_456',
+    storeId: 'store_123',
     success_url: 'https://foo.bar/success',
+    type: 'embed',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: checkoutResponse, response: raw } = await client.checkout
-  .create({
-    product_id: 'prod_123',
-    cancel_url: 'https://foo.bar/cancel',
-    email: 'customer@foo.bar',
-    method: 'card',
+const { data: response, response: raw } = await client.payments
+  .createIntent({
+    amount: 2500,
+    currency: 'usd',
+    description: 'foo bar',
+    email: 'foo@bar.com',
+    productId: 'prod_456',
+    storeId: 'store_123',
     success_url: 'https://foo.bar/success',
+    type: 'embed',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(checkoutResponse.success);
+console.log(response);
 ```
 
 ### Logging
@@ -253,7 +268,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.checkout.create({
+client.payments.createIntent({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
