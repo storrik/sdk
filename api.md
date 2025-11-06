@@ -1,22 +1,9 @@
-# Checkout
+# Payments
 
 Types:
 
-- <code><a href="./src/resources/checkout.ts">CheckoutRequest</a></code>
-- <code><a href="./src/resources/checkout.ts">CheckoutResponse</a></code>
+- <code><a href="./src/resources/payments.ts">PaymentCreateIntentResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/checkout">client.checkout.<a href="./src/resources/checkout.ts">create</a>({ ...params }) -> CheckoutResponse</code>
-
-# Orders
-
-Types:
-
-- <code><a href="./src/resources/orders.ts">VerifyOrderError</a></code>
-- <code><a href="./src/resources/orders.ts">VerifyOrderRequest</a></code>
-- <code><a href="./src/resources/orders.ts">VerifyOrderResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/order/verify">client.orders.<a href="./src/resources/orders.ts">verify</a>({ ...params }) -> VerifyOrderResponse</code>
+- <code title="post /v1/payments/intents">client.payments.<a href="./src/resources/payments.ts">createIntent</a>({ ...params }) -> PaymentCreateIntentResponse</code>
