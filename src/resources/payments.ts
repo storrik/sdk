@@ -6,41 +6,65 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Payments extends APIResource {
   /**
-   * Creates a **Payment Intent**, representing a charge for a product or custom
-   * amount.
-   * Depending on `type`, the response will include either:
-   *
-   * - a `client_secret` for client-side confirmation (`embed` mode), or
-   * - a hosted checkout `url` for redirect-based checkout (`hosted` mode).
-   *
-   * @example
-   * ```ts
-   * const response = await client.payments.createIntent({
-   *   amount: 50,
-   *   currency: 'usd',
-   * });
-   * ```
+   * Creates a payment intent.
    */
-  createIntent(
-    body: PaymentCreateIntentParams,
-    options?: RequestOptions,
-  ): APIPromise<PaymentCreateIntentResponse> {
+  createIntent(body: PaymentCreateIntentParams, options?: RequestOptions): APIPromise<PaymentIntentResponse> {
     return this._client.post('/v1/payments/intents', { body, ...options });
   }
 }
 
-export type PaymentCreateIntentResponse =
-  | PaymentCreateIntentResponse.EmbedClientSide
-  | PaymentCreateIntentResponse.HostedRedirectCheckout;
+export interface PaymentIntentRequest {
+  amount: number;
 
-export namespace PaymentCreateIntentResponse {
-  export interface EmbedClientSide {
+  currency: string;
+
+  method: 'card';
+
+  type: 'embed' | 'hosted';
+
+  cancel_url?: string;
+
+  collect_billing?: boolean;
+
+  collect_shipping?: boolean;
+
+  country?: string;
+
+  coupon?: string;
+
+  customerId?: string;
+
+  description?: string;
+
+  email?: string;
+
+  metadata?: { [key: string]: string };
+
+  productId?: string;
+
+  quantity?: number;
+
+  receipt_email?: string;
+
+  storeId?: string;
+
+  success_url?: string;
+
+  variantId?: string;
+}
+
+export type PaymentIntentResponse =
+  | PaymentIntentResponse.EmbedResponse
+  | PaymentIntentResponse.HostedResponse;
+
+export namespace PaymentIntentResponse {
+  export interface EmbedResponse {
     clientSecret?: string;
 
     ok?: boolean;
   }
 
-  export interface HostedRedirectCheckout {
+  export interface HostedResponse {
     ok?: boolean;
 
     url?: string;
@@ -48,76 +72,49 @@ export namespace PaymentCreateIntentResponse {
 }
 
 export interface PaymentCreateIntentParams {
-  /**
-   * Amount in smallest currency unit (e.g., cents). Minimum 50.
-   */
   amount: number;
 
-  /**
-   * ISO 4217 currency code (`usd`, `eur`).
-   */
   currency: string;
 
-  /**
-   * Redirect URL after cancellation (hosted only).
-   */
+  method: 'card';
+
+  type: 'embed' | 'hosted';
+
   cancel_url?: string;
 
-  /**
-   * Optional existing customer ID. Created automatically if not provided.
-   */
+  collect_billing?: boolean;
+
+  collect_shipping?: boolean;
+
+  country?: string;
+
+  coupon?: string;
+
   customerId?: string;
 
-  /**
-   * Short description of the payment or item.
-   */
   description?: string;
 
-  /**
-   * Customer email address.
-   */
   email?: string;
 
-  /**
-   * Optional metadata object stored with the payment.
-   */
   metadata?: { [key: string]: string };
 
-  /**
-   * Payment method. Currently only `card` is supported.
-   */
-  method?: 'card' | 'crypto' | 'paypal';
-
-  /**
-   * Optional product ID linked to the payment.
-   */
   productId?: string;
 
-  /**
-   * Email for receipts (defaults to `email`).
-   */
+  quantity?: number;
+
   receipt_email?: string;
 
-  /**
-   * Optional store ID (auto-inferred from your API key if omitted).
-   */
   storeId?: string;
 
-  /**
-   * Redirect URL after successful payment (hosted or embed with redirect).
-   */
   success_url?: string;
 
-  /**
-   * - **embed** → Returns a `client_secret` for client-side confirmation
-   * - **hosted** → Returns a hosted checkout `url` for redirect-based checkout.
-   */
-  type?: 'embed' | 'hosted';
+  variantId?: string;
 }
 
 export declare namespace Payments {
   export {
-    type PaymentCreateIntentResponse as PaymentCreateIntentResponse,
+    type PaymentIntentRequest as PaymentIntentRequest,
+    type PaymentIntentResponse as PaymentIntentResponse,
     type PaymentCreateIntentParams as PaymentCreateIntentParams,
   };
 }

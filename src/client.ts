@@ -16,7 +16,12 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { PaymentCreateIntentParams, PaymentCreateIntentResponse, Payments } from './resources/payments';
+import {
+  PaymentCreateIntentParams,
+  PaymentIntentRequest,
+  PaymentIntentResponse,
+  Payments,
+} from './resources/payments';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -697,7 +702,8 @@ export declare namespace Storrik {
 
   export {
     Payments as Payments,
-    type PaymentCreateIntentResponse as PaymentCreateIntentResponse,
+    type PaymentIntentRequest as PaymentIntentRequest,
+    type PaymentIntentResponse as PaymentIntentResponse,
     type PaymentCreateIntentParams as PaymentCreateIntentParams,
   };
 }
