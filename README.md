@@ -26,12 +26,10 @@ const client = new Storrik();
 
 const paymentIntentResponse = await client.payments.createIntent({
   amount: 2500,
-  currency: 'usd',
-  method: 'card',
+  currency: 'USD',
   type: 'hosted',
-  description: 'foo bar',
-  email: 'foo@bar.com',
-  productId: 'prod_456',
+  description: 'Test product purchase',
+  email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
 });
 ```
@@ -48,12 +46,10 @@ const client = new Storrik();
 
 const params: Storrik.PaymentCreateIntentParams = {
   amount: 2500,
-  currency: 'usd',
-  method: 'card',
-  type: 'embed',
-  description: 'foo bar',
-  email: 'foo@bar.com',
-  productId: 'prod_456',
+  currency: 'USD',
+  type: 'hosted',
+  description: 'Default hosted checkout',
+  email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
 };
 const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(params);
@@ -72,12 +68,10 @@ a subclass of `APIError` will be thrown:
 const paymentIntentResponse = await client.payments
   .createIntent({
     amount: 2500,
-    currency: 'usd',
-    method: 'card',
-    type: 'embed',
-    description: 'foo bar',
-    email: 'foo@bar.com',
-    productId: 'prod_456',
+    currency: 'USD',
+    type: 'hosted',
+    description: 'Default hosted checkout',
+    email: 'test@foo.bar',
     success_url: 'https://foo.bar/success',
   })
   .catch(async (err) => {
@@ -120,7 +114,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'USD', type: 'hosted', description: 'Default hosted checkout', email: 'test@foo.bar', success_url: 'https://foo.bar/success' }, {
   maxRetries: 5,
 });
 ```
@@ -137,7 +131,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'USD', type: 'hosted', description: 'Default hosted checkout', email: 'test@foo.bar', success_url: 'https://foo.bar/success' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -163,12 +157,10 @@ const client = new Storrik();
 const response = await client.payments
   .createIntent({
     amount: 2500,
-    currency: 'usd',
-    method: 'card',
-    type: 'embed',
-    description: 'foo bar',
-    email: 'foo@bar.com',
-    productId: 'prod_456',
+    currency: 'USD',
+    type: 'hosted',
+    description: 'Default hosted checkout',
+    email: 'test@foo.bar',
     success_url: 'https://foo.bar/success',
   })
   .asResponse();
@@ -178,12 +170,10 @@ console.log(response.statusText); // access the underlying Response object
 const { data: paymentIntentResponse, response: raw } = await client.payments
   .createIntent({
     amount: 2500,
-    currency: 'usd',
-    method: 'card',
-    type: 'embed',
-    description: 'foo bar',
-    email: 'foo@bar.com',
-    productId: 'prod_456',
+    currency: 'USD',
+    type: 'hosted',
+    description: 'Default hosted checkout',
+    email: 'test@foo.bar',
     success_url: 'https://foo.bar/success',
   })
   .withResponse();
