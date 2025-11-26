@@ -46,25 +46,21 @@ export interface PaymentIntentRequest {
 
   receipt_email?: string;
 
-  storeId?: string;
-
   success_url?: string;
 
   variantId?: string;
 }
 
-export type PaymentIntentResponse =
-  | PaymentIntentResponse.EmbedResponse
-  | PaymentIntentResponse.HostedResponse;
+export type PaymentIntentResponse = PaymentIntentResponse.Embed | PaymentIntentResponse.Hosted;
 
 export namespace PaymentIntentResponse {
-  export interface EmbedResponse {
+  export interface Embed {
     clientSecret?: string;
 
     ok?: boolean;
   }
 
-  export interface HostedResponse {
+  export interface Hosted {
     ok?: boolean;
 
     url?: string;
@@ -103,8 +99,6 @@ export interface PaymentCreateIntentParams {
   quantity?: number;
 
   receipt_email?: string;
-
-  storeId?: string;
 
   success_url?: string;
 

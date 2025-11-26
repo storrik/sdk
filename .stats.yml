@@ -1,4 +1,4 @@
 configured_endpoints: 1
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/storrik-io%2Fstorrik-2f93c2522795a5599cc7d17bd842b485ede4788aea257da27e1c23a0ac33bbeb.yml
-openapi_spec_hash: 6f1514f27b80f74da8a8fb37fca46e5e
-config_hash: 4f98405c0aa5dcd66109266e79b9c5db
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/storrik-io%2Fstorrik-17be16d379aa761928b187c42cb6f0e4e14697a73a07b54dc24f7fa52ea0cfd1.yml
+openapi_spec_hash: 37263e4e4828c73f46e08f8c194f4950
+config_hash: 2b73c7eb7affabdeb7488e7fbd0e7629
