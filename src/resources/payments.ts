@@ -6,7 +6,9 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Payments extends APIResource {
   /**
-   * Creates a payment intent.
+   * Creates a payment intent for a product or fixed amount.
+   * The response will return either a hosted checkout url or a client secret for
+   * embedded mode.
    */
   createIntent(body: PaymentCreateIntentParams, options?: RequestOptions): APIPromise<PaymentIntentResponse> {
     return this._client.post('/v1/payments/intents', { body, ...options });
@@ -14,12 +16,19 @@ export class Payments extends APIResource {
 }
 
 export interface PaymentIntentRequest {
+  /**
+   * Amount in the smallest currency unit (cents).
+   */
   amount: number;
 
-  currency: string;
+  /**
+   * currency used on the payment.
+   */
+  currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN';
 
-  method: 'card';
-
+  /**
+   * Checkout mode. Hosted returns a redirect url.
+   */
   type: 'embed' | 'hosted';
 
   cancel_url?: string;
@@ -28,6 +37,9 @@ export interface PaymentIntentRequest {
 
   collect_shipping?: boolean;
 
+  /**
+   * Optional ISO country code. Auto determined if missing.
+   */
   country?: string;
 
   coupon?: string;
@@ -39,6 +51,11 @@ export interface PaymentIntentRequest {
   email?: string;
 
   metadata?: { [key: string]: string };
+
+  /**
+   * Payment method. Defaults to card.
+   */
+  method?: 'card';
 
   productId?: string;
 
@@ -68,12 +85,19 @@ export namespace PaymentIntentResponse {
 }
 
 export interface PaymentCreateIntentParams {
+  /**
+   * Amount in the smallest currency unit (cents).
+   */
   amount: number;
 
-  currency: string;
+  /**
+   * currency used on the payment.
+   */
+  currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN';
 
-  method: 'card';
-
+  /**
+   * Checkout mode. Hosted returns a redirect url.
+   */
   type: 'embed' | 'hosted';
 
   cancel_url?: string;
@@ -82,6 +106,9 @@ export interface PaymentCreateIntentParams {
 
   collect_shipping?: boolean;
 
+  /**
+   * Optional ISO country code. Auto determined if missing.
+   */
   country?: string;
 
   coupon?: string;
@@ -93,6 +120,11 @@ export interface PaymentCreateIntentParams {
   email?: string;
 
   metadata?: { [key: string]: string };
+
+  /**
+   * Payment method. Defaults to card.
+   */
+  method?: 'card';
 
   productId?: string;
 
