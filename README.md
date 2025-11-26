@@ -32,7 +32,6 @@ const paymentIntentResponse = await client.payments.createIntent({
   description: 'foo bar',
   email: 'foo@bar.com',
   productId: 'prod_456',
-  storeId: 'store_123',
   success_url: 'https://foo.bar/success',
 });
 ```
@@ -55,7 +54,6 @@ const params: Storrik.PaymentCreateIntentParams = {
   description: 'foo bar',
   email: 'foo@bar.com',
   productId: 'prod_456',
-  storeId: 'store_123',
   success_url: 'https://foo.bar/success',
 };
 const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(params);
@@ -80,7 +78,6 @@ const paymentIntentResponse = await client.payments
     description: 'foo bar',
     email: 'foo@bar.com',
     productId: 'prod_456',
-    storeId: 'store_123',
     success_url: 'https://foo.bar/success',
   })
   .catch(async (err) => {
@@ -123,7 +120,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', success_url: 'https://foo.bar/success' }, {
   maxRetries: 5,
 });
 ```
@@ -140,7 +137,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', success_url: 'https://foo.bar/success' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -172,7 +169,6 @@ const response = await client.payments
     description: 'foo bar',
     email: 'foo@bar.com',
     productId: 'prod_456',
-    storeId: 'store_123',
     success_url: 'https://foo.bar/success',
   })
   .asResponse();
@@ -188,7 +184,6 @@ const { data: paymentIntentResponse, response: raw } = await client.payments
     description: 'foo bar',
     email: 'foo@bar.com',
     productId: 'prod_456',
-    storeId: 'store_123',
     success_url: 'https://foo.bar/success',
   })
   .withResponse();
