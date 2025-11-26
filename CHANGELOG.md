@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.0 (2025-11-26)
+
+Full Changelog: [v1.5.0...v1.6.0](https://github.com/storrik/sdk/compare/v1.5.0...v1.6.0)
+
+### Features
+
+* **api:** manual updates ([55f54d4](https://github.com/storrik/sdk/commit/55f54d47dc89133bec3a0cc187ad8b8a61ed00ba))
+
 ## 1.5.0 (2025-11-26)
 
 Full Changelog: [v1.4.0...v1.5.0](https://github.com/storrik/sdk/compare/v1.4.0...v1.5.0)
