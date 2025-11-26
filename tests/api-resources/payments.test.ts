@@ -41,7 +41,6 @@ describe('resource payments', () => {
       productId: 'productId',
       quantity: 1,
       receipt_email: 'dev@stainless.com',
-      storeId: 'storeId',
       success_url: 'https://example.com',
       variantId: 'variantId',
     });
