@@ -24,15 +24,16 @@ import Storrik from 'storrik';
 
 const client = new Storrik();
 
-const response = await client.payments.createIntent({
+const paymentIntentResponse = await client.payments.createIntent({
   amount: 2500,
   currency: 'usd',
+  method: 'card',
+  type: 'hosted',
   description: 'foo bar',
   email: 'foo@bar.com',
   productId: 'prod_456',
   storeId: 'store_123',
   success_url: 'https://foo.bar/success',
-  type: 'hosted',
 });
 ```
 
@@ -49,14 +50,15 @@ const client = new Storrik();
 const params: Storrik.PaymentCreateIntentParams = {
   amount: 2500,
   currency: 'usd',
+  method: 'card',
+  type: 'embed',
   description: 'foo bar',
   email: 'foo@bar.com',
   productId: 'prod_456',
   storeId: 'store_123',
   success_url: 'https://foo.bar/success',
-  type: 'embed',
 };
-const response: Storrik.PaymentCreateIntentResponse = await client.payments.createIntent(params);
+const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -69,16 +71,17 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const response = await client.payments
+const paymentIntentResponse = await client.payments
   .createIntent({
     amount: 2500,
     currency: 'usd',
+    method: 'card',
+    type: 'embed',
     description: 'foo bar',
     email: 'foo@bar.com',
     productId: 'prod_456',
     storeId: 'store_123',
     success_url: 'https://foo.bar/success',
-    type: 'embed',
   })
   .catch(async (err) => {
     if (err instanceof Storrik.APIError) {
@@ -120,7 +123,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'usd', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success', type: 'embed' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success' }, {
   maxRetries: 5,
 });
 ```
@@ -137,7 +140,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'usd', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success', type: 'embed' }, {
+await client.payments.createIntent({ amount: 2500, currency: 'usd', method: 'card', type: 'embed', description: 'foo bar', email: 'foo@bar.com', productId: 'prod_456', storeId: 'store_123', success_url: 'https://foo.bar/success' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -164,31 +167,33 @@ const response = await client.payments
   .createIntent({
     amount: 2500,
     currency: 'usd',
+    method: 'card',
+    type: 'embed',
     description: 'foo bar',
     email: 'foo@bar.com',
     productId: 'prod_456',
     storeId: 'store_123',
     success_url: 'https://foo.bar/success',
-    type: 'embed',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client.payments
+const { data: paymentIntentResponse, response: raw } = await client.payments
   .createIntent({
     amount: 2500,
     currency: 'usd',
+    method: 'card',
+    type: 'embed',
     description: 'foo bar',
     email: 'foo@bar.com',
     productId: 'prod_456',
     storeId: 'store_123',
     success_url: 'https://foo.bar/success',
-    type: 'embed',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response);
+console.log(paymentIntentResponse);
 ```
 
 ### Logging
