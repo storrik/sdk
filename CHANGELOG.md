@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.6.1 (2025-12-06)
+
+Full Changelog: [v1.6.0...v1.6.1](https://github.com/storrik/sdk/compare/v1.6.0...v1.6.1)
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([0bc3808](https://github.com/storrik/sdk/commit/0bc3808b50fce5156adfe242df29b5bc2079927b))
+* **mcp:** return correct lines on typescript errors ([cb8c873](https://github.com/storrik/sdk/commit/cb8c873c486d4589dd6152e321361f68e4488d51))
+
+
+### Chores
+
+* **client:** fix logger property type ([1b6ed31](https://github.com/storrik/sdk/commit/1b6ed31227b042941f1236da2a20ef18016a4052))
+* **internal:** codegen related update ([8640b42](https://github.com/storrik/sdk/commit/8640b42b694c608f9469842758ae89b198a0aa34))
+* **internal:** upgrade eslint ([0ceb7ca](https://github.com/storrik/sdk/commit/0ceb7ca4b4a5e6d9cafca22bc9cb6fb81850a62d))
+
 ## 1.6.0 (2025-11-26)
 
 Full Changelog: [v1.5.0...v1.6.0](https://github.com/storrik/sdk/compare/v1.5.0...v1.6.0)
