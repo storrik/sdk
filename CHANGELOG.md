@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.6.2 (2025-12-06)
+
+Full Changelog: [v1.6.1...v1.6.2](https://github.com/storrik/sdk/compare/v1.6.1...v1.6.2)
+
+### Chores
+
+* **internal:** codegen related update ([3012a07](https://github.com/storrik/sdk/commit/3012a0787764c91b7445b1b0c1c6e098857175b5))
+
 ## 1.6.1 (2025-12-06)
 
 Full Changelog: [v1.6.0...v1.6.1](https://github.com/storrik/sdk/compare/v1.6.0...v1.6.1)
