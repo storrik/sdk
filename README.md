@@ -52,7 +52,9 @@ const params: Storrik.PaymentCreateIntentParams = {
   email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
 };
-const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(params);
+const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(
+  params,
+);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -114,7 +116,14 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'USD', type: 'hosted', description: 'Default hosted checkout', email: 'test@foo.bar', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({
+  amount: 2500,
+  currency: 'USD',
+  type: 'hosted',
+  description: 'Default hosted checkout',
+  email: 'test@foo.bar',
+  success_url: 'https://foo.bar/success',
+}, {
   maxRetries: 5,
 });
 ```
@@ -131,7 +140,14 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.payments.createIntent({ amount: 2500, currency: 'USD', type: 'hosted', description: 'Default hosted checkout', email: 'test@foo.bar', success_url: 'https://foo.bar/success' }, {
+await client.payments.createIntent({
+  amount: 2500,
+  currency: 'USD',
+  type: 'hosted',
+  description: 'Default hosted checkout',
+  email: 'test@foo.bar',
+  success_url: 'https://foo.bar/success',
+}, {
   timeout: 5 * 1000,
 });
 ```
