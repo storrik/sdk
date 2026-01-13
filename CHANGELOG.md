@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.0 (2026-01-13)
+
+Full Changelog: [v1.6.2...v1.7.0](https://github.com/storrik/sdk/compare/v1.6.2...v1.7.0)
+
+### Features
+
+* **api:** api update ([75044d1](https://github.com/storrik/sdk/commit/75044d1908bec4d3d6450921e1cc4229a17931e1))
+
 ## 1.6.2 (2026-01-07)
 
 Full Changelog: [v1.6.1...v1.6.2](https://github.com/storrik/sdk/compare/v1.6.1...v1.6.2)
