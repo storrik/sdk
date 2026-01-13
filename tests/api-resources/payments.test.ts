@@ -7,11 +7,7 @@ const client = new Storrik({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http:
 describe('resource payments', () => {
   // Prism tests are disabled
   test.skip('createIntent: only required params', async () => {
-    const responsePromise = client.payments.createIntent({
-      amount: 50,
-      currency: 'USD',
-      type: 'embed',
-    });
+    const responsePromise = client.payments.createIntent({ amount: 50, currency: 'USD' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -26,7 +22,6 @@ describe('resource payments', () => {
     const response = await client.payments.createIntent({
       amount: 50,
       currency: 'USD',
-      type: 'embed',
       cancel_url: 'https://example.com',
       collect_billing: true,
       collect_shipping: true,
@@ -41,6 +36,7 @@ describe('resource payments', () => {
       quantity: 1,
       receipt_email: 'dev@stainless.com',
       success_url: 'https://example.com',
+      type: 'embed',
       variantId: 'variantId',
     });
   });

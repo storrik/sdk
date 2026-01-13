@@ -27,10 +27,10 @@ const client = new Storrik();
 const paymentIntentResponse = await client.payments.createIntent({
   amount: 2500,
   currency: 'USD',
-  type: 'hosted',
   description: 'Test product purchase',
   email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
+  type: 'hosted',
 });
 ```
 
@@ -47,10 +47,10 @@ const client = new Storrik();
 const params: Storrik.PaymentCreateIntentParams = {
   amount: 2500,
   currency: 'USD',
-  type: 'hosted',
   description: 'Default hosted checkout',
   email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
+  type: 'hosted',
 };
 const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(
   params,
@@ -71,10 +71,10 @@ const paymentIntentResponse = await client.payments
   .createIntent({
     amount: 2500,
     currency: 'USD',
-    type: 'hosted',
     description: 'Default hosted checkout',
     email: 'test@foo.bar',
     success_url: 'https://foo.bar/success',
+    type: 'hosted',
   })
   .catch(async (err) => {
     if (err instanceof Storrik.APIError) {
@@ -119,10 +119,10 @@ const client = new Storrik({
 await client.payments.createIntent({
   amount: 2500,
   currency: 'USD',
-  type: 'hosted',
   description: 'Default hosted checkout',
   email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
+  type: 'hosted',
 }, {
   maxRetries: 5,
 });
@@ -143,10 +143,10 @@ const client = new Storrik({
 await client.payments.createIntent({
   amount: 2500,
   currency: 'USD',
-  type: 'hosted',
   description: 'Default hosted checkout',
   email: 'test@foo.bar',
   success_url: 'https://foo.bar/success',
+  type: 'hosted',
 }, {
   timeout: 5 * 1000,
 });
@@ -174,10 +174,10 @@ const response = await client.payments
   .createIntent({
     amount: 2500,
     currency: 'USD',
-    type: 'hosted',
     description: 'Default hosted checkout',
     email: 'test@foo.bar',
     success_url: 'https://foo.bar/success',
+    type: 'hosted',
   })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
@@ -187,10 +187,10 @@ const { data: paymentIntentResponse, response: raw } = await client.payments
   .createIntent({
     amount: 2500,
     currency: 'USD',
-    type: 'hosted',
     description: 'Default hosted checkout',
     email: 'test@foo.bar',
     success_url: 'https://foo.bar/success',
+    type: 'hosted',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
