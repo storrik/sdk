@@ -7,8 +7,12 @@ import { RequestOptions } from '../internal/request-options';
 export class Payments extends APIResource {
   /**
    * Creates a payment intent for a product or fixed amount.
-   * The response will return either a hosted checkout url or a client secret for
-   * embedded mode.
+   *
+   * Default behavior:
+   *
+   * - If `type` is not provided, it defaults to `hosted` and returns a hosted
+   *   checkout url.
+   * - If `type` is `embed`, it returns a client secret for embedded flows.
    */
   createIntent(body: PaymentCreateIntentParams, options?: RequestOptions): APIPromise<PaymentIntentResponse> {
     return this._client.post('/v1/payments/intents', { body, ...options });
@@ -22,14 +26,9 @@ export interface PaymentIntentRequest {
   amount: number;
 
   /**
-   * currency used on the payment.
+   * Currency used on the payment.
    */
-  currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN';
-
-  /**
-   * Checkout mode. Hosted returns a redirect url.
-   */
-  type: 'embed' | 'hosted';
+  currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN' | 'CAD';
 
   cancel_url?: string;
 
@@ -65,6 +64,11 @@ export interface PaymentIntentRequest {
 
   success_url?: string;
 
+  /**
+   * Checkout mode. Defaults to hosted.
+   */
+  type?: 'embed' | 'hosted';
+
   variantId?: string;
 }
 
@@ -72,15 +76,26 @@ export type PaymentIntentResponse = PaymentIntentResponse.Embed | PaymentIntentR
 
 export namespace PaymentIntentResponse {
   export interface Embed {
-    clientSecret?: string;
+    /**
+     * Client secret for confirming the payment intent.
+     */
+    clientSecret: string;
 
-    ok?: boolean;
+    ok: boolean;
+
+    /**
+     * Publishable key to use on the client.
+     */
+    pk: string;
   }
 
   export interface Hosted {
-    ok?: boolean;
+    /**
+     * Hosted checkout url to redirect the customer to.
+     */
+    checkoutUrl: string;
 
-    url?: string;
+    ok: boolean;
   }
 }
 
@@ -91,14 +106,9 @@ export interface PaymentCreateIntentParams {
   amount: number;
 
   /**
-   * currency used on the payment.
+   * Currency used on the payment.
    */
-  currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN';
-
-  /**
-   * Checkout mode. Hosted returns a redirect url.
-   */
-  type: 'embed' | 'hosted';
+  currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN' | 'CAD';
 
   cancel_url?: string;
 
@@ -133,6 +143,11 @@ export interface PaymentCreateIntentParams {
   receipt_email?: string;
 
   success_url?: string;
+
+  /**
+   * Checkout mode. Defaults to hosted.
+   */
+  type?: 'embed' | 'hosted';
 
   variantId?: string;
 }
