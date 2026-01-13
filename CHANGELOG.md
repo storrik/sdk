@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.6.2 (2026-01-07)
+
+Full Changelog: [v1.6.1...v1.6.2](https://github.com/storrik/sdk/compare/v1.6.1...v1.6.2)
+
+### Chores
+
+* break long lines in snippets into multiline ([9d0af5c](https://github.com/storrik/sdk/commit/9d0af5c06c532c6adf6e4f58f18f88f78d92361f))
+* **internal:** codegen related update ([e6f25f1](https://github.com/storrik/sdk/commit/e6f25f1bd7f6c6c251dd6cc8316b20965d2202c1))
+* **internal:** codegen related update ([3012a07](https://github.com/storrik/sdk/commit/3012a0787764c91b7445b1b0c1c6e098857175b5))
+
 ## 1.6.1 (2025-12-06)
 
 Full Changelog: [v1.6.0...v1.6.1](https://github.com/storrik/sdk/compare/v1.6.0...v1.6.1)
