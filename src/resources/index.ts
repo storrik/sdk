@@ -2,7 +2,6 @@
 
 export {
   Payments,
-  type PaymentIntentRequest,
-  type PaymentIntentResponse,
+  type PaymentCreateIntentResponse,
   type PaymentCreateIntentParams,
-} from './payments';
+} from './payments/payments';
