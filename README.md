@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Storrik REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [docs.storrik.io](https://docs.storrik.io/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.storrik.com](https://docs.storrik.com/). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -24,14 +24,7 @@ import Storrik from 'storrik';
 
 const client = new Storrik();
 
-const paymentIntentResponse = await client.payments.createIntent({
-  amount: 2500,
-  currency: 'USD',
-  description: 'Test product purchase',
-  email: 'test@foo.bar',
-  success_url: 'https://foo.bar/success',
-  type: 'hosted',
-});
+const response = await client.payments.createIntent({ amount: 50, currency: 'USD' });
 ```
 
 ### Request & Response types
@@ -44,17 +37,8 @@ import Storrik from 'storrik';
 
 const client = new Storrik();
 
-const params: Storrik.PaymentCreateIntentParams = {
-  amount: 2500,
-  currency: 'USD',
-  description: 'Default hosted checkout',
-  email: 'test@foo.bar',
-  success_url: 'https://foo.bar/success',
-  type: 'hosted',
-};
-const paymentIntentResponse: Storrik.PaymentIntentResponse = await client.payments.createIntent(
-  params,
-);
+const params: Storrik.PaymentCreateIntentParams = { amount: 50, currency: 'USD' };
+const response: Storrik.PaymentCreateIntentResponse = await client.payments.createIntent(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -67,15 +51,8 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const paymentIntentResponse = await client.payments
-  .createIntent({
-    amount: 2500,
-    currency: 'USD',
-    description: 'Default hosted checkout',
-    email: 'test@foo.bar',
-    success_url: 'https://foo.bar/success',
-    type: 'hosted',
-  })
+const response = await client.payments
+  .createIntent({ amount: 50, currency: 'USD' })
   .catch(async (err) => {
     if (err instanceof Storrik.APIError) {
       console.log(err.status); // 400
@@ -116,14 +93,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.payments.createIntent({
-  amount: 2500,
-  currency: 'USD',
-  description: 'Default hosted checkout',
-  email: 'test@foo.bar',
-  success_url: 'https://foo.bar/success',
-  type: 'hosted',
-}, {
+await client.payments.createIntent({ amount: 50, currency: 'USD' }, {
   maxRetries: 5,
 });
 ```
@@ -140,14 +110,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.payments.createIntent({
-  amount: 2500,
-  currency: 'USD',
-  description: 'Default hosted checkout',
-  email: 'test@foo.bar',
-  success_url: 'https://foo.bar/success',
-  type: 'hosted',
-}, {
+await client.payments.createIntent({ amount: 50, currency: 'USD' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -170,31 +133,15 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Storrik();
 
-const response = await client.payments
-  .createIntent({
-    amount: 2500,
-    currency: 'USD',
-    description: 'Default hosted checkout',
-    email: 'test@foo.bar',
-    success_url: 'https://foo.bar/success',
-    type: 'hosted',
-  })
-  .asResponse();
+const response = await client.payments.createIntent({ amount: 50, currency: 'USD' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: paymentIntentResponse, response: raw } = await client.payments
-  .createIntent({
-    amount: 2500,
-    currency: 'USD',
-    description: 'Default hosted checkout',
-    email: 'test@foo.bar',
-    success_url: 'https://foo.bar/success',
-    type: 'hosted',
-  })
+const { data: response, response: raw } = await client.payments
+  .createIntent({ amount: 50, currency: 'USD' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(paymentIntentResponse);
+console.log(response);
 ```
 
 ### Logging

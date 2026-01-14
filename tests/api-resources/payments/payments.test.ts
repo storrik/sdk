@@ -2,7 +2,10 @@
 
 import Storrik from 'storrik';
 
-const client = new Storrik({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
+const client = new Storrik({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource payments', () => {
   // Prism tests are disabled
