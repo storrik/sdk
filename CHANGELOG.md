@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.9.0 (2026-01-14)
+
+Full Changelog: [v1.8.0...v1.9.0](https://github.com/storrik/sdk/compare/v1.8.0...v1.9.0)
+
+### Features
+
+* **api:** manual updates ([fc56f60](https://github.com/storrik/sdk/commit/fc56f60aac29b64d987dcbc34fb32b260cb8d2a1))
+
 ## 1.8.0 (2026-01-14)
 
 Full Changelog: [v1.7.0...v1.8.0](https://github.com/storrik/sdk/compare/v1.7.0...v1.8.0)
