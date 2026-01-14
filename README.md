@@ -22,7 +22,9 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Storrik from 'storrik';
 
-const client = new Storrik();
+const client = new Storrik({
+  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
+});
 
 const response = await client.payments.createIntent({ amount: 50, currency: 'USD' });
 ```
@@ -35,7 +37,9 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Storrik from 'storrik';
 
-const client = new Storrik();
+const client = new Storrik({
+  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
+});
 
 const params: Storrik.PaymentCreateIntentParams = { amount: 50, currency: 'USD' };
 const response: Storrik.PaymentCreateIntentResponse = await client.payments.createIntent(params);

@@ -36,9 +36,14 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Use Authorization: Bearer pk_...
+   * Defaults to process.env['STORRIK_API_KEY'].
    */
   apiKey?: string | undefined;
+
+  /**
+   * Defaults to process.env['STORRIK_PUBLISHABLE_KEY'].
+   */
+  publishableKey?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -114,6 +119,7 @@ export interface ClientOptions {
  */
 export class Storrik {
   apiKey: string;
+  publishableKey: string;
 
   baseURL: string;
   maxRetries: number;
@@ -131,6 +137,7 @@ export class Storrik {
    * API Client for interfacing with the Storrik API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['STORRIK_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.publishableKey=process.env['STORRIK_PUBLISHABLE_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['STORRIK_BASE_URL'] ?? https://api.storrik.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -142,6 +149,7 @@ export class Storrik {
   constructor({
     baseURL = readEnv('STORRIK_BASE_URL'),
     apiKey = readEnv('STORRIK_API_KEY'),
+    publishableKey = readEnv('STORRIK_PUBLISHABLE_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -149,9 +157,15 @@ export class Storrik {
         "The STORRIK_API_KEY environment variable is missing or empty; either provide it, or instantiate the Storrik client with an apiKey option, like new Storrik({ apiKey: 'My API Key' }).",
       );
     }
+    if (publishableKey === undefined) {
+      throw new Errors.StorrikError(
+        "The STORRIK_PUBLISHABLE_KEY environment variable is missing or empty; either provide it, or instantiate the Storrik client with an publishableKey option, like new Storrik({ publishableKey: 'My Publishable Key' }).",
+      );
+    }
 
     const options: ClientOptions = {
       apiKey,
+      publishableKey,
       ...opts,
       baseURL: baseURL || `https://api.storrik.com`,
     };
@@ -174,6 +188,7 @@ export class Storrik {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.publishableKey = publishableKey;
   }
 
   /**
@@ -190,6 +205,7 @@ export class Storrik {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      publishableKey: this.publishableKey,
       ...options,
     });
     return client;
@@ -211,7 +227,15 @@ export class Storrik {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    return buildHeaders([await this.apiKeyAuth(opts), await this.publishableKeyAuth(opts)]);
+  }
+
+  protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     return buildHeaders([{ Authorization: this.apiKey }]);
+  }
+
+  protected async publishableKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    return buildHeaders([{ Authorization: this.publishableKey }]);
   }
 
   /**
