@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.10.1 (2026-01-17)
+
+Full Changelog: [v1.10.0...v1.10.1](https://github.com/storrik/sdk/compare/v1.10.0...v1.10.1)
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([46f9912](https://github.com/storrik/sdk/commit/46f99120441059060aa7a06df1c7794cc7054a6c))
+* **internal:** update lock file ([6dc2cef](https://github.com/storrik/sdk/commit/6dc2cef3d0b09c4b141c12f66a8f29c36596b040))
+* **internal:** upgrade babel, qs, js-yaml ([dc92877](https://github.com/storrik/sdk/commit/dc9287731b93ae297fd799843e30d9d4b9c63c0e))
+* **internal:** upgrade brace-expansion and @babel/helpers ([95ff234](https://github.com/storrik/sdk/commit/95ff2349f35b990970ea007224fdf9736570d592))
+
 ## 1.10.0 (2026-01-14)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/storrik/sdk/compare/v1.9.0...v1.10.0)
