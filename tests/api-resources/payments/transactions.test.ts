@@ -9,7 +9,7 @@ const client = new Storrik({
 });
 
 describe('resource transactions', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('client', async () => {
     const responsePromise = client.payments.transactions.client('transaction_id');
     const rawResponse = await responsePromise.asResponse();
