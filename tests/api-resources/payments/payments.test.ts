@@ -9,7 +9,7 @@ const client = new Storrik({
 });
 
 describe('resource payments', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createIntent: only required params', async () => {
     const responsePromise = client.payments.createIntent({ amount: 50, currency: 'USD' });
     const rawResponse = await responsePromise.asResponse();
@@ -21,7 +21,7 @@ describe('resource payments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('createIntent: required and optional params', async () => {
     const response = await client.payments.createIntent({
       amount: 50,
