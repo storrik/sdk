@@ -60,7 +60,7 @@ $ yarn link storrik
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global storrik
+$ pnpm link --global storrik
 ```
 
 ## Running tests
