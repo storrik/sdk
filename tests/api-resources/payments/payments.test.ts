@@ -27,21 +27,13 @@ describe('resource payments', () => {
       amount: 50,
       currency: 'USD',
       cancel_url: 'https://example.com',
-      collect_billing: true,
-      collect_shipping: true,
       country: 'xx',
-      coupon: 'coupon',
-      customerId: 'customerId',
-      description: 'description',
       email: 'dev@stainless.com',
-      metadata: { foo: 'string' },
+      metadata: { foo: 'bar' },
       method: 'card',
-      productId: 'productId',
-      quantity: 1,
-      receipt_email: 'dev@stainless.com',
+      product_id: 'product_id',
       success_url: 'https://example.com',
       type: 'embed',
-      variantId: 'variantId',
     });
   });
 });

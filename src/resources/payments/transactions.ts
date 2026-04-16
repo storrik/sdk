@@ -10,7 +10,7 @@ export class Transactions extends APIResource {
    * Retrieves a client-safe view of a transaction using a publishable key. Intended
    * for checkout or embed flows to poll or fetch transaction status.
    *
-   * The response excludes all sensitive fields such as fees, customer details,
+   * The response excludes all sensitive fields such as fees, customer details, and
    * metadata.
    */
   client(transactionID: string, options?: RequestOptions): APIPromise<TransactionClientResponse> {
@@ -19,55 +19,20 @@ export class Transactions extends APIResource {
 }
 
 export interface TransactionClientResponse {
-  ok: boolean;
+  amount: number;
 
-  transaction: TransactionClientResponse.Transaction;
-}
+  currency: string;
 
-export namespace TransactionClientResponse {
-  export interface Transaction {
-    /**
-     * Transaction ID.
-     */
-    id: string;
+  status: 'pending' | 'processing' | 'succeeded' | 'failed' | 'cancelled';
 
-    /**
-     * Gross amount in the smallest currency unit.
-     */
-    amount: number;
+  transaction_id: string;
 
-    /**
-     * UNIX timestamp when the transaction was created.
-     */
-    createdAt: number;
+  /**
+   * Unix timestamp.
+   */
+  created_at?: number;
 
-    /**
-     * ISO currency code.
-     */
-    currency: string;
-
-    quantity: number;
-
-    /**
-     * Current transaction status.
-     */
-    status: string;
-
-    /**
-     * UNIX timestamp when the transaction was last updated.
-     */
-    updatedAt: number;
-
-    /**
-     * Product ID from the original order snapshot.
-     */
-    productId?: string | null;
-
-    /**
-     * Variant ID from the original order snapshot.
-     */
-    variantId?: string | null;
-  }
+  product_name?: string | null;
 }
 
 export declare namespace Transactions {
