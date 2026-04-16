@@ -1,5 +1,45 @@
 # Changelog
 
+## 1.11.0 (2026-04-16)
+
+Full Changelog: [v1.10.0...v1.11.0](https://github.com/storrik/sdk/compare/v1.10.0...v1.11.0)
+
+### Features
+
+* **api:** api update ([abf2162](https://github.com/storrik/sdk/commit/abf2162debb428f95c8ec2f63fd585fed7b9ae4c))
+* **api:** api update ([1943d70](https://github.com/storrik/sdk/commit/1943d702b5ba62f598d892720548878894d9affe))
+* **api:** manual updates ([7ff4a42](https://github.com/storrik/sdk/commit/7ff4a42213b5562050d67e9005d8d93fc668d628))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([008a989](https://github.com/storrik/sdk/commit/008a9898d1c5a2f005fa2f7cee3df1729aa3c532))
+* **client:** avoid removing abort listener too early ([6f8e62e](https://github.com/storrik/sdk/commit/6f8e62efa65b7de813a7d6bcb562d2c56875303a))
+* **client:** preserve URL params already embedded in path ([b4c831e](https://github.com/storrik/sdk/commit/b4c831e44b695cdfe7a3a345d04311d0e85b3ec0))
+* **docs/contributing:** correct pnpm link command ([fe40bab](https://github.com/storrik/sdk/commit/fe40bab625ca7eb2d65b44de51f9e74eeedd08f8))
+
+
+### Chores
+
+* **ci:** skip uploading artifacts on stainless-internal branches ([46a3aef](https://github.com/storrik/sdk/commit/46a3aef96927fafca2ed045a11902b37b94a2894))
+* **ci:** upgrade `actions/github-script` ([cc0cdcb](https://github.com/storrik/sdk/commit/cc0cdcbc4ce1d1e5ed49a449ca4ce8b6543b2c5c))
+* **client:** do not parse responses with empty content-length ([b9fbc6e](https://github.com/storrik/sdk/commit/b9fbc6e04eaf11d3bc6897dc3785daa73f549ce7))
+* **client:** restructure abort controller binding ([f54d801](https://github.com/storrik/sdk/commit/f54d80150f71bc1c70ad91d2b673aa851d08a0b3))
+* **internal/client:** fix form-urlencoded requests ([047c7f9](https://github.com/storrik/sdk/commit/047c7f921cfd2b0e6576c1cfaa50c8f73b9fdeda))
+* **internal:** avoid type checking errors with ts-reset ([b9cb38d](https://github.com/storrik/sdk/commit/b9cb38d5a04c5cd54a1c03dda9f9eda2594963bc))
+* **internal:** codegen related update ([136f329](https://github.com/storrik/sdk/commit/136f329ee5226d5b8f86bb173223712d49b3b853))
+* **internal:** codegen related update ([99b8503](https://github.com/storrik/sdk/commit/99b8503b93d0fcdda2380a5f48fdcd6b603f1049))
+* **internal:** move stringifyQuery implementation to internal function ([1790088](https://github.com/storrik/sdk/commit/17900886385b63f201bc4bc263f3dfb03d45ad6e))
+* **internal:** remove mock server code ([0db8378](https://github.com/storrik/sdk/commit/0db8378b2d215d5ddbbc0708654fa2838e513123))
+* **internal:** update `actions/checkout` version ([46f9912](https://github.com/storrik/sdk/commit/46f99120441059060aa7a06df1c7794cc7054a6c))
+* **internal:** update dependencies to address dependabot vulnerabilities ([4218181](https://github.com/storrik/sdk/commit/4218181911e59e7ea9fe0409190380b0f6d59792))
+* **internal:** update lock file ([6dc2cef](https://github.com/storrik/sdk/commit/6dc2cef3d0b09c4b141c12f66a8f29c36596b040))
+* **internal:** upgrade babel, qs, js-yaml ([dc92877](https://github.com/storrik/sdk/commit/dc9287731b93ae297fd799843e30d9d4b9c63c0e))
+* **internal:** upgrade brace-expansion and @babel/helpers ([95ff234](https://github.com/storrik/sdk/commit/95ff2349f35b990970ea007224fdf9736570d592))
+* **internal:** upgrade pnpm ([4eafba3](https://github.com/storrik/sdk/commit/4eafba3ab540db32b55bfda225acfd23b840d043))
+* **internal:** upgrade pnpm version ([9f68a93](https://github.com/storrik/sdk/commit/9f68a93b82368499fb695813cea2a46eb3e0a66c))
+* update mock server docs ([61d8e14](https://github.com/storrik/sdk/commit/61d8e1470af5a466bacb6ca67d1eaac8a34e0fae))
+
 ## 1.10.0 (2026-01-14)
 
 Full Changelog: [v1.9.0...v1.10.0](https://github.com/storrik/sdk/compare/v1.9.0...v1.10.0)
