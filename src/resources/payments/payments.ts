@@ -15,7 +15,7 @@ export class Payments extends APIResource {
    * Default behavior:
    *
    * - If `type` is not provided, it defaults to `hosted` and returns a hosted
-   *   checkout url.
+   *   checkout URL.
    * - If `type` is `embed`, it returns a client secret for embedded flows.
    */
   createIntent(
@@ -26,38 +26,19 @@ export class Payments extends APIResource {
   }
 }
 
-export type PaymentCreateIntentResponse =
-  | PaymentCreateIntentResponse.Embed
-  | PaymentCreateIntentResponse.Hosted;
+export interface PaymentCreateIntentResponse {
+  type: 'hosted' | 'embed';
 
-export namespace PaymentCreateIntentResponse {
-  export interface Embed {
-    /**
-     * Client secret for confirming the payment intent.
-     */
-    clientSecret: string;
+  checkout_url?: string | null;
 
-    ok: boolean;
+  client_secret?: string | null;
 
-    /**
-     * Publishable key to use on the client.
-     */
-    pk: string;
-  }
-
-  export interface Hosted {
-    /**
-     * Hosted checkout url to redirect the customer to.
-     */
-    checkoutUrl: string;
-
-    ok: boolean;
-  }
+  transaction_id?: string | null;
 }
 
 export interface PaymentCreateIntentParams {
   /**
-   * Amount in the smallest currency unit (cents).
+   * Amount in the smallest currency unit.
    */
   amount: number;
 
@@ -66,46 +47,42 @@ export interface PaymentCreateIntentParams {
    */
   currency: 'USD' | 'EUR' | 'GBP' | 'AUD' | 'CYN' | 'CAD';
 
+  /**
+   * Optional redirect URL after cancelled payment.
+   */
   cancel_url?: string;
 
-  collect_billing?: boolean;
-
-  collect_shipping?: boolean;
-
   /**
-   * Optional ISO country code. Auto determined if missing.
+   * Optional ISO country code.
    */
   country?: string;
 
-  coupon?: string;
-
-  customerId?: string;
-
-  description?: string;
-
   email?: string;
 
-  metadata?: { [key: string]: string };
+  /**
+   * Optional metadata for the payment.
+   */
+  metadata?: { [key: string]: unknown };
 
   /**
    * Payment method. Defaults to card.
    */
   method?: 'card';
 
-  productId?: string;
+  /**
+   * Optional product identifier.
+   */
+  product_id?: string;
 
-  quantity?: number;
-
-  receipt_email?: string;
-
+  /**
+   * Optional redirect URL after successful payment.
+   */
   success_url?: string;
 
   /**
    * Checkout mode. Defaults to hosted.
    */
   type?: 'embed' | 'hosted';
-
-  variantId?: string;
 }
 
 Payments.Transactions = Transactions;
