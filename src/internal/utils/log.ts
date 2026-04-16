@@ -107,6 +107,7 @@ export const formatRequestDetails = (details: {
           name,
           (
             name.toLowerCase() === 'authorization' ||
+            name.toLowerCase() === 'x-customer-authorization' ||
             name.toLowerCase() === 'cookie' ||
             name.toLowerCase() === 'set-cookie'
           ) ?
