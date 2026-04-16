@@ -18,6 +18,31 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  Customer,
+  CustomerLoginParams,
+  CustomerLoginResponse,
+  CustomerLogoutResponse,
+  CustomerMeResponse,
+  CustomerVerifyLoginParams,
+  CustomerVerifyLoginResponse,
+} from './resources/customer';
+import {
+  Frontend,
+  FrontendForgotPasswordParams,
+  FrontendForgotPasswordResponse,
+  FrontendLoginParams,
+  FrontendLoginResponse,
+  FrontendLogoutResponse,
+  FrontendMeResponse,
+  FrontendRefreshResponse,
+  FrontendRegisterParams,
+  FrontendRegisterResponse,
+  FrontendResetPasswordParams,
+  FrontendResetPasswordResponse,
+  FrontendVerifyEmailParams,
+  FrontendVerifyEmailResponse,
+} from './resources/frontend';
+import {
   PaymentCreateIntentParams,
   PaymentCreateIntentResponse,
   Payments,
@@ -35,6 +60,12 @@ import {
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
+const environments = {
+  production: 'https://api.storrik.com',
+  development: 'http://localhost:8080',
+};
+type Environment = keyof typeof environments;
+
 export interface ClientOptions {
   /**
    * Defaults to process.env['STORRIK_API_KEY'].
@@ -45,6 +76,25 @@ export interface ClientOptions {
    * Defaults to process.env['STORRIK_PUBLISHABLE_KEY'].
    */
   publishableKey?: string | undefined;
+
+  /**
+   * Defaults to process.env['STORRIK_ACCESS_TOKEN'].
+   */
+  accessToken?: string | undefined;
+
+  /**
+   * Defaults to process.env['STORRIK_CUSTOMER_SESSION_TOKEN'].
+   */
+  customerSessionToken?: string | undefined;
+
+  /**
+   * Specifies the environment to use for the API.
+   *
+   * Each environment maps to a different base URL:
+   * - `production` corresponds to `https://api.storrik.com`
+   * - `development` corresponds to `http://localhost:8080`
+   */
+  environment?: Environment | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -121,6 +171,8 @@ export interface ClientOptions {
 export class Storrik {
   apiKey: string;
   publishableKey: string;
+  accessToken: string;
+  customerSessionToken: string;
 
   baseURL: string;
   maxRetries: number;
@@ -139,6 +191,9 @@ export class Storrik {
    *
    * @param {string | undefined} [opts.apiKey=process.env['STORRIK_API_KEY'] ?? undefined]
    * @param {string | undefined} [opts.publishableKey=process.env['STORRIK_PUBLISHABLE_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.accessToken=process.env['STORRIK_ACCESS_TOKEN'] ?? undefined]
+   * @param {string | undefined} [opts.customerSessionToken=process.env['STORRIK_CUSTOMER_SESSION_TOKEN'] ?? undefined]
+   * @param {Environment} [opts.environment=production] - Specifies the environment URL to use for the API.
    * @param {string} [opts.baseURL=process.env['STORRIK_BASE_URL'] ?? https://api.storrik.com] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -151,6 +206,8 @@ export class Storrik {
     baseURL = readEnv('STORRIK_BASE_URL'),
     apiKey = readEnv('STORRIK_API_KEY'),
     publishableKey = readEnv('STORRIK_PUBLISHABLE_KEY'),
+    accessToken = readEnv('STORRIK_ACCESS_TOKEN'),
+    customerSessionToken = readEnv('STORRIK_CUSTOMER_SESSION_TOKEN'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -163,15 +220,34 @@ export class Storrik {
         "The STORRIK_PUBLISHABLE_KEY environment variable is missing or empty; either provide it, or instantiate the Storrik client with an publishableKey option, like new Storrik({ publishableKey: 'My Publishable Key' }).",
       );
     }
+    if (accessToken === undefined) {
+      throw new Errors.StorrikError(
+        "The STORRIK_ACCESS_TOKEN environment variable is missing or empty; either provide it, or instantiate the Storrik client with an accessToken option, like new Storrik({ accessToken: 'My Access Token' }).",
+      );
+    }
+    if (customerSessionToken === undefined) {
+      throw new Errors.StorrikError(
+        "The STORRIK_CUSTOMER_SESSION_TOKEN environment variable is missing or empty; either provide it, or instantiate the Storrik client with an customerSessionToken option, like new Storrik({ customerSessionToken: 'My Customer Session Token' }).",
+      );
+    }
 
     const options: ClientOptions = {
       apiKey,
       publishableKey,
+      accessToken,
+      customerSessionToken,
       ...opts,
-      baseURL: baseURL || `https://api.storrik.com`,
+      baseURL,
+      environment: opts.environment ?? 'production',
     };
 
-    this.baseURL = options.baseURL!;
+    if (baseURL && opts.environment) {
+      throw new Errors.StorrikError(
+        'Ambiguous URL; The `baseURL` option (or STORRIK_BASE_URL env var) and the `environment` option are given. If you want to use the environment you must pass baseURL: null',
+      );
+    }
+
+    this.baseURL = options.baseURL || environments[options.environment || 'production'];
     this.timeout = options.timeout ?? Storrik.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
@@ -190,6 +266,8 @@ export class Storrik {
 
     this.apiKey = apiKey;
     this.publishableKey = publishableKey;
+    this.accessToken = accessToken;
+    this.customerSessionToken = customerSessionToken;
   }
 
   /**
@@ -198,7 +276,8 @@ export class Storrik {
   withOptions(options: Partial<ClientOptions>): this {
     const client = new (this.constructor as any as new (props: ClientOptions) => typeof this)({
       ...this._options,
-      baseURL: this.baseURL,
+      environment: options.environment ? options.environment : undefined,
+      baseURL: options.environment ? undefined : this.baseURL,
       maxRetries: this.maxRetries,
       timeout: this.timeout,
       logger: this.logger,
@@ -207,6 +286,8 @@ export class Storrik {
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
       publishableKey: this.publishableKey,
+      accessToken: this.accessToken,
+      customerSessionToken: this.customerSessionToken,
       ...options,
     });
     return client;
@@ -216,7 +297,7 @@ export class Storrik {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://api.storrik.com';
+    return this.baseURL !== environments[this._options.environment || 'production'];
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
@@ -228,7 +309,12 @@ export class Storrik {
   }
 
   protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([await this.apiKeyAuth(opts), await this.publishableKeyAuth(opts)]);
+    return buildHeaders([
+      await this.apiKeyAuth(opts),
+      await this.publishableKeyAuth(opts),
+      await this.accessTokenAuth(opts),
+      await this.customerSessionAuth(opts),
+    ]);
   }
 
   protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
@@ -237,6 +323,14 @@ export class Storrik {
 
   protected async publishableKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
     return buildHeaders([{ Authorization: this.publishableKey }]);
+  }
+
+  protected async accessTokenAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    return buildHeaders([{ Authorization: `Bearer ${this.accessToken}` }]);
+  }
+
+  protected async customerSessionAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
+    return buildHeaders([{ 'x-customer-authorization': this.customerSessionToken }]);
   }
 
   /**
@@ -746,17 +840,48 @@ export class Storrik {
 
   static toFile = Uploads.toFile;
 
+  frontend: API.Frontend = new API.Frontend(this);
   payments: API.Payments = new API.Payments(this);
+  customer: API.Customer = new API.Customer(this);
 }
 
+Storrik.Frontend = Frontend;
 Storrik.Payments = Payments;
+Storrik.Customer = Customer;
 
 export declare namespace Storrik {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
+    Frontend as Frontend,
+    type FrontendForgotPasswordResponse as FrontendForgotPasswordResponse,
+    type FrontendLoginResponse as FrontendLoginResponse,
+    type FrontendLogoutResponse as FrontendLogoutResponse,
+    type FrontendMeResponse as FrontendMeResponse,
+    type FrontendRefreshResponse as FrontendRefreshResponse,
+    type FrontendRegisterResponse as FrontendRegisterResponse,
+    type FrontendResetPasswordResponse as FrontendResetPasswordResponse,
+    type FrontendVerifyEmailResponse as FrontendVerifyEmailResponse,
+    type FrontendForgotPasswordParams as FrontendForgotPasswordParams,
+    type FrontendLoginParams as FrontendLoginParams,
+    type FrontendRegisterParams as FrontendRegisterParams,
+    type FrontendResetPasswordParams as FrontendResetPasswordParams,
+    type FrontendVerifyEmailParams as FrontendVerifyEmailParams,
+  };
+
+  export {
     Payments as Payments,
     type PaymentCreateIntentResponse as PaymentCreateIntentResponse,
     type PaymentCreateIntentParams as PaymentCreateIntentParams,
+  };
+
+  export {
+    Customer as Customer,
+    type CustomerLoginResponse as CustomerLoginResponse,
+    type CustomerLogoutResponse as CustomerLogoutResponse,
+    type CustomerMeResponse as CustomerMeResponse,
+    type CustomerVerifyLoginResponse as CustomerVerifyLoginResponse,
+    type CustomerLoginParams as CustomerLoginParams,
+    type CustomerVerifyLoginParams as CustomerVerifyLoginParams,
   };
 }

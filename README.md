@@ -23,12 +23,15 @@ The full API of this library can be found in [api.md](api.md).
 import Storrik from 'storrik';
 
 const client = new Storrik({
-  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
+  environment: 'development', // defaults to 'production'
 });
 
-const response = await client.payments.createIntent({ amount: 50, currency: 'USD' });
+const response = await client.frontend.login({
+  email: 'nate@storrik.com',
+  password: 'supersecurepassword',
+});
 
-console.log(response.transaction_id);
+console.log(response.user_id);
 ```
 
 ### Request & Response types
@@ -41,9 +44,10 @@ import Storrik from 'storrik';
 
 const client = new Storrik({
   apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
+  environment: 'development', // defaults to 'production'
 });
 
-const params: Storrik.PaymentCreateIntentParams = { amount: 50, currency: 'USD' };
+const params: Storrik.PaymentCreateIntentParams = { amount: 4900, currency: 'USD' };
 const response: Storrik.PaymentCreateIntentResponse = await client.payments.createIntent(params);
 ```
 
@@ -58,7 +62,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 const response = await client.payments
-  .createIntent({ amount: 50, currency: 'USD' })
+  .createIntent({ amount: 4900, currency: 'USD' })
   .catch(async (err) => {
     if (err instanceof Storrik.APIError) {
       console.log(err.status); // 400
@@ -99,7 +103,7 @@ const client = new Storrik({
 });
 
 // Or, configure per-request:
-await client.payments.createIntent({ amount: 50, currency: 'USD' }, {
+await client.payments.createIntent({ amount: 4900, currency: 'USD' }, {
   maxRetries: 5,
 });
 ```
@@ -116,7 +120,7 @@ const client = new Storrik({
 });
 
 // Override per-request:
-await client.payments.createIntent({ amount: 50, currency: 'USD' }, {
+await client.payments.createIntent({ amount: 4900, currency: 'USD' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -139,12 +143,12 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Storrik();
 
-const response = await client.payments.createIntent({ amount: 50, currency: 'USD' }).asResponse();
+const response = await client.payments.createIntent({ amount: 4900, currency: 'USD' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client.payments
-  .createIntent({ amount: 50, currency: 'USD' })
+  .createIntent({ amount: 4900, currency: 'USD' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response.transaction_id);
@@ -227,7 +231,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.payments.createIntent({
+client.frontend.login({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
