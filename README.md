@@ -27,6 +27,8 @@ const client = new Storrik({
 });
 
 const response = await client.payments.createIntent({ amount: 50, currency: 'USD' });
+
+console.log(response.transaction_id);
 ```
 
 ### Request & Response types
@@ -145,7 +147,7 @@ const { data: response, response: raw } = await client.payments
   .createIntent({ amount: 50, currency: 'USD' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response);
+console.log(response.transaction_id);
 ```
 
 ### Logging
