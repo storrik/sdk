@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.11.1 (2026-04-16)
+
+Full Changelog: [v1.11.0...v1.11.1](https://github.com/storrik/sdk/compare/v1.11.0...v1.11.1)
+
+### Chores
+
+* update SDK settings ([b5f23ab](https://github.com/storrik/sdk/commit/b5f23ab8040ab6f1b597a111016ff36c325e8ee8))
+
 ## 1.11.0 (2026-04-16)
 
 Full Changelog: [v1.10.0...v1.11.0](https://github.com/storrik/sdk/compare/v1.10.0...v1.11.0)
