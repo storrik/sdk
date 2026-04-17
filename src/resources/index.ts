@@ -1,6 +1,22 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Auth,
+  type AuthForgotPasswordResponse,
+  type AuthLoginResponse,
+  type AuthLogoutResponse,
+  type AuthMeResponse,
+  type AuthRefreshResponse,
+  type AuthRegisterResponse,
+  type AuthResetPasswordResponse,
+  type AuthVerifyEmailResponse,
+  type AuthForgotPasswordParams,
+  type AuthLoginParams,
+  type AuthRegisterParams,
+  type AuthResetPasswordParams,
+  type AuthVerifyEmailParams,
+} from './auth';
+export {
   Customer,
   type CustomerLoginResponse,
   type CustomerLogoutResponse,
@@ -9,22 +25,6 @@ export {
   type CustomerLoginParams,
   type CustomerVerifyLoginParams,
 } from './customer';
-export {
-  Frontend,
-  type FrontendForgotPasswordResponse,
-  type FrontendLoginResponse,
-  type FrontendLogoutResponse,
-  type FrontendMeResponse,
-  type FrontendRefreshResponse,
-  type FrontendRegisterResponse,
-  type FrontendResetPasswordResponse,
-  type FrontendVerifyEmailResponse,
-  type FrontendForgotPasswordParams,
-  type FrontendLoginParams,
-  type FrontendRegisterParams,
-  type FrontendResetPasswordParams,
-  type FrontendVerifyEmailParams,
-} from './frontend';
 export {
   Payments,
   type PaymentCreateIntentResponse,

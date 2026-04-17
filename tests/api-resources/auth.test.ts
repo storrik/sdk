@@ -10,10 +10,10 @@ const client = new Storrik({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource frontend', () => {
+describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('forgotPassword: only required params', async () => {
-    const responsePromise = client.frontend.forgotPassword({ email: 'test@storrik.com' });
+    const responsePromise = client.auth.forgotPassword({ email: 'test@storrik.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,15 +25,12 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('forgotPassword: required and optional params', async () => {
-    const response = await client.frontend.forgotPassword({ email: 'test@storrik.com' });
+    const response = await client.auth.forgotPassword({ email: 'test@storrik.com' });
   });
 
   // Mock server tests are disabled
   test.skip('login: only required params', async () => {
-    const responsePromise = client.frontend.login({
-      email: 'test@storrik.com',
-      password: 'supersecurepassword',
-    });
+    const responsePromise = client.auth.login({ email: 'test@storrik.com', password: 'supersecurepassword' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,15 +42,12 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('login: required and optional params', async () => {
-    const response = await client.frontend.login({
-      email: 'test@storrik.com',
-      password: 'supersecurepassword',
-    });
+    const response = await client.auth.login({ email: 'test@storrik.com', password: 'supersecurepassword' });
   });
 
   // Mock server tests are disabled
   test.skip('logout', async () => {
-    const responsePromise = client.frontend.logout();
+    const responsePromise = client.auth.logout();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,7 +59,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('me', async () => {
-    const responsePromise = client.frontend.me();
+    const responsePromise = client.auth.me();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,7 +71,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('refresh', async () => {
-    const responsePromise = client.frontend.refresh();
+    const responsePromise = client.auth.refresh();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,7 +83,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('register: only required params', async () => {
-    const responsePromise = client.frontend.register({
+    const responsePromise = client.auth.register({
       email: 'test@storrik.com',
       password: 'supersecurepassword',
     });
@@ -104,7 +98,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('register: required and optional params', async () => {
-    const response = await client.frontend.register({
+    const response = await client.auth.register({
       email: 'test@storrik.com',
       password: 'supersecurepassword',
     });
@@ -112,7 +106,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('resetPassword: only required params', async () => {
-    const responsePromise = client.frontend.resetPassword({
+    const responsePromise = client.auth.resetPassword({
       token: 'reset_token_here',
       new_password: 'newpassword123',
     });
@@ -127,7 +121,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('resetPassword: required and optional params', async () => {
-    const response = await client.frontend.resetPassword({
+    const response = await client.auth.resetPassword({
       token: 'reset_token_here',
       new_password: 'newpassword123',
     });
@@ -135,7 +129,7 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('verifyEmail: only required params', async () => {
-    const responsePromise = client.frontend.verifyEmail({ token: 'email_token_here' });
+    const responsePromise = client.auth.verifyEmail({ token: 'email_token_here' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -147,6 +141,6 @@ describe('resource frontend', () => {
 
   // Mock server tests are disabled
   test.skip('verifyEmail: required and optional params', async () => {
-    const response = await client.frontend.verifyEmail({ token: 'email_token_here' });
+    const response = await client.auth.verifyEmail({ token: 'email_token_here' });
   });
 });
