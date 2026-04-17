@@ -1,26 +1,26 @@
-# Frontend
+# Auth
 
 Types:
 
-- <code><a href="./src/resources/frontend.ts">FrontendForgotPasswordResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendLoginResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendLogoutResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendMeResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendRefreshResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendRegisterResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendResetPasswordResponse</a></code>
-- <code><a href="./src/resources/frontend.ts">FrontendVerifyEmailResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthForgotPasswordResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthLoginResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthLogoutResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthMeResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthRefreshResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthRegisterResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthResetPasswordResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthVerifyEmailResponse</a></code>
 
 Methods:
 
-- <code title="post /auth/forgot-password">client.frontend.<a href="./src/resources/frontend.ts">forgotPassword</a>({ ...params }) -> FrontendForgotPasswordResponse</code>
-- <code title="post /auth/login">client.frontend.<a href="./src/resources/frontend.ts">login</a>({ ...params }) -> FrontendLoginResponse</code>
-- <code title="post /auth/logout">client.frontend.<a href="./src/resources/frontend.ts">logout</a>() -> FrontendLogoutResponse</code>
-- <code title="get /me">client.frontend.<a href="./src/resources/frontend.ts">me</a>() -> FrontendMeResponse</code>
-- <code title="post /auth/refresh">client.frontend.<a href="./src/resources/frontend.ts">refresh</a>() -> FrontendRefreshResponse</code>
-- <code title="post /auth/register">client.frontend.<a href="./src/resources/frontend.ts">register</a>({ ...params }) -> FrontendRegisterResponse</code>
-- <code title="post /auth/reset-password">client.frontend.<a href="./src/resources/frontend.ts">resetPassword</a>({ ...params }) -> FrontendResetPasswordResponse</code>
-- <code title="post /auth/verify-email">client.frontend.<a href="./src/resources/frontend.ts">verifyEmail</a>({ ...params }) -> FrontendVerifyEmailResponse</code>
+- <code title="post /auth/forgot-password">client.auth.<a href="./src/resources/auth.ts">forgotPassword</a>({ ...params }) -> AuthForgotPasswordResponse</code>
+- <code title="post /auth/login">client.auth.<a href="./src/resources/auth.ts">login</a>({ ...params }) -> AuthLoginResponse</code>
+- <code title="post /auth/logout">client.auth.<a href="./src/resources/auth.ts">logout</a>() -> AuthLogoutResponse</code>
+- <code title="get /me">client.auth.<a href="./src/resources/auth.ts">me</a>() -> AuthMeResponse</code>
+- <code title="post /auth/refresh">client.auth.<a href="./src/resources/auth.ts">refresh</a>() -> AuthRefreshResponse</code>
+- <code title="post /auth/register">client.auth.<a href="./src/resources/auth.ts">register</a>({ ...params }) -> AuthRegisterResponse</code>
+- <code title="post /auth/reset-password">client.auth.<a href="./src/resources/auth.ts">resetPassword</a>({ ...params }) -> AuthResetPasswordResponse</code>
+- <code title="post /auth/verify-email">client.auth.<a href="./src/resources/auth.ts">verifyEmail</a>({ ...params }) -> AuthVerifyEmailResponse</code>
 
 # Payments
 
