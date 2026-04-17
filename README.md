@@ -23,10 +23,10 @@ The full API of this library can be found in [api.md](api.md).
 import Storrik from 'storrik';
 
 const client = new Storrik({
-  environment: 'development', // defaults to 'production'
+  environment: 'development', // or 'production' | 'beta'; defaults to 'production'
 });
 
-const response = await client.frontend.login({
+const response = await client.auth.login({
   email: 'nate@storrik.com',
   password: 'supersecurepassword',
 });
@@ -44,7 +44,7 @@ import Storrik from 'storrik';
 
 const client = new Storrik({
   apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
-  environment: 'development', // defaults to 'production'
+  environment: 'development', // or 'production' | 'beta'; defaults to 'production'
 });
 
 const params: Storrik.PaymentCreateIntentParams = { amount: 4900, currency: 'USD' };
@@ -231,7 +231,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.frontend.login({
+client.auth.login({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

@@ -18,6 +18,22 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  Auth,
+  AuthForgotPasswordParams,
+  AuthForgotPasswordResponse,
+  AuthLoginParams,
+  AuthLoginResponse,
+  AuthLogoutResponse,
+  AuthMeResponse,
+  AuthRefreshResponse,
+  AuthRegisterParams,
+  AuthRegisterResponse,
+  AuthResetPasswordParams,
+  AuthResetPasswordResponse,
+  AuthVerifyEmailParams,
+  AuthVerifyEmailResponse,
+} from './resources/auth';
+import {
   Customer,
   CustomerLoginParams,
   CustomerLoginResponse,
@@ -26,22 +42,6 @@ import {
   CustomerVerifyLoginParams,
   CustomerVerifyLoginResponse,
 } from './resources/customer';
-import {
-  Frontend,
-  FrontendForgotPasswordParams,
-  FrontendForgotPasswordResponse,
-  FrontendLoginParams,
-  FrontendLoginResponse,
-  FrontendLogoutResponse,
-  FrontendMeResponse,
-  FrontendRefreshResponse,
-  FrontendRegisterParams,
-  FrontendRegisterResponse,
-  FrontendResetPasswordParams,
-  FrontendResetPasswordResponse,
-  FrontendVerifyEmailParams,
-  FrontendVerifyEmailResponse,
-} from './resources/frontend';
 import {
   PaymentCreateIntentParams,
   PaymentCreateIntentResponse,
@@ -62,7 +62,8 @@ import { isEmptyObj } from './internal/utils/values';
 
 const environments = {
   production: 'https://api.storrik.com',
-  development: 'http://localhost:8080',
+  development: 'https://dev-api.storrik.com',
+  beta: 'https://beta-api.storrik.com',
 };
 type Environment = keyof typeof environments;
 
@@ -92,7 +93,8 @@ export interface ClientOptions {
    *
    * Each environment maps to a different base URL:
    * - `production` corresponds to `https://api.storrik.com`
-   * - `development` corresponds to `http://localhost:8080`
+   * - `development` corresponds to `https://dev-api.storrik.com`
+   * - `beta` corresponds to `https://beta-api.storrik.com`
    */
   environment?: Environment | undefined;
 
@@ -840,12 +842,12 @@ export class Storrik {
 
   static toFile = Uploads.toFile;
 
-  frontend: API.Frontend = new API.Frontend(this);
+  auth: API.Auth = new API.Auth(this);
   payments: API.Payments = new API.Payments(this);
   customer: API.Customer = new API.Customer(this);
 }
 
-Storrik.Frontend = Frontend;
+Storrik.Auth = Auth;
 Storrik.Payments = Payments;
 Storrik.Customer = Customer;
 
@@ -853,20 +855,20 @@ export declare namespace Storrik {
   export type RequestOptions = Opts.RequestOptions;
 
   export {
-    Frontend as Frontend,
-    type FrontendForgotPasswordResponse as FrontendForgotPasswordResponse,
-    type FrontendLoginResponse as FrontendLoginResponse,
-    type FrontendLogoutResponse as FrontendLogoutResponse,
-    type FrontendMeResponse as FrontendMeResponse,
-    type FrontendRefreshResponse as FrontendRefreshResponse,
-    type FrontendRegisterResponse as FrontendRegisterResponse,
-    type FrontendResetPasswordResponse as FrontendResetPasswordResponse,
-    type FrontendVerifyEmailResponse as FrontendVerifyEmailResponse,
-    type FrontendForgotPasswordParams as FrontendForgotPasswordParams,
-    type FrontendLoginParams as FrontendLoginParams,
-    type FrontendRegisterParams as FrontendRegisterParams,
-    type FrontendResetPasswordParams as FrontendResetPasswordParams,
-    type FrontendVerifyEmailParams as FrontendVerifyEmailParams,
+    Auth as Auth,
+    type AuthForgotPasswordResponse as AuthForgotPasswordResponse,
+    type AuthLoginResponse as AuthLoginResponse,
+    type AuthLogoutResponse as AuthLogoutResponse,
+    type AuthMeResponse as AuthMeResponse,
+    type AuthRefreshResponse as AuthRefreshResponse,
+    type AuthRegisterResponse as AuthRegisterResponse,
+    type AuthResetPasswordResponse as AuthResetPasswordResponse,
+    type AuthVerifyEmailResponse as AuthVerifyEmailResponse,
+    type AuthForgotPasswordParams as AuthForgotPasswordParams,
+    type AuthLoginParams as AuthLoginParams,
+    type AuthRegisterParams as AuthRegisterParams,
+    type AuthResetPasswordParams as AuthResetPasswordParams,
+    type AuthVerifyEmailParams as AuthVerifyEmailParams,
   };
 
   export {

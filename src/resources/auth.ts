@@ -4,21 +4,21 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-export class Frontend extends APIResource {
+export class Auth extends APIResource {
   /**
    * Sends a password reset email if the email exists. Always returns success.
    *
    * @example
    * ```ts
-   * const response = await client.frontend.forgotPassword({
+   * const response = await client.auth.forgotPassword({
    *   email: 'test@storrik.com',
    * });
    * ```
    */
   forgotPassword(
-    body: FrontendForgotPasswordParams,
+    body: AuthForgotPasswordParams,
     options?: RequestOptions,
-  ): APIPromise<FrontendForgotPasswordResponse> {
+  ): APIPromise<AuthForgotPasswordResponse> {
     return this._client.post('/auth/forgot-password', { body, ...options });
   }
 
@@ -30,13 +30,13 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.login({
+   * const response = await client.auth.login({
    *   email: 'test@storrik.com',
    *   password: 'supersecurepassword',
    * });
    * ```
    */
-  login(body: FrontendLoginParams, options?: RequestOptions): APIPromise<FrontendLoginResponse> {
+  login(body: AuthLoginParams, options?: RequestOptions): APIPromise<AuthLoginResponse> {
     return this._client.post('/auth/login', { body, ...options });
   }
 
@@ -45,10 +45,10 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.logout();
+   * const response = await client.auth.logout();
    * ```
    */
-  logout(options?: RequestOptions): APIPromise<FrontendLogoutResponse> {
+  logout(options?: RequestOptions): APIPromise<AuthLogoutResponse> {
     return this._client.post('/auth/logout', options);
   }
 
@@ -57,10 +57,10 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.me();
+   * const response = await client.auth.me();
    * ```
    */
-  me(options?: RequestOptions): APIPromise<FrontendMeResponse> {
+  me(options?: RequestOptions): APIPromise<AuthMeResponse> {
     return this._client.get('/me', options);
   }
 
@@ -69,10 +69,10 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.refresh();
+   * const response = await client.auth.refresh();
    * ```
    */
-  refresh(options?: RequestOptions): APIPromise<FrontendRefreshResponse> {
+  refresh(options?: RequestOptions): APIPromise<AuthRefreshResponse> {
     return this._client.post('/auth/refresh', options);
   }
 
@@ -81,13 +81,13 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.register({
+   * const response = await client.auth.register({
    *   email: 'test@storrik.com',
    *   password: 'supersecurepassword',
    * });
    * ```
    */
-  register(body: FrontendRegisterParams, options?: RequestOptions): APIPromise<FrontendRegisterResponse> {
+  register(body: AuthRegisterParams, options?: RequestOptions): APIPromise<AuthRegisterResponse> {
     return this._client.post('/auth/register', { body, ...options });
   }
 
@@ -102,16 +102,16 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.resetPassword({
+   * const response = await client.auth.resetPassword({
    *   token: 'reset_token_here',
    *   new_password: 'newpassword123',
    * });
    * ```
    */
   resetPassword(
-    body: FrontendResetPasswordParams,
+    body: AuthResetPasswordParams,
     options?: RequestOptions,
-  ): APIPromise<FrontendResetPasswordResponse> {
+  ): APIPromise<AuthResetPasswordResponse> {
     return this._client.post('/auth/reset-password', { body, ...options });
   }
 
@@ -120,24 +120,21 @@ export class Frontend extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.frontend.verifyEmail({
+   * const response = await client.auth.verifyEmail({
    *   token: 'email_token_here',
    * });
    * ```
    */
-  verifyEmail(
-    body: FrontendVerifyEmailParams,
-    options?: RequestOptions,
-  ): APIPromise<FrontendVerifyEmailResponse> {
+  verifyEmail(body: AuthVerifyEmailParams, options?: RequestOptions): APIPromise<AuthVerifyEmailResponse> {
     return this._client.post('/auth/verify-email', { body, ...options });
   }
 }
 
-export interface FrontendForgotPasswordResponse {
+export interface AuthForgotPasswordResponse {
   message: string;
 }
 
-export interface FrontendLoginResponse {
+export interface AuthLoginResponse {
   access_token: string;
 
   email_verified: boolean;
@@ -145,74 +142,74 @@ export interface FrontendLoginResponse {
   user_id: string;
 }
 
-export interface FrontendLogoutResponse {
+export interface AuthLogoutResponse {
   message: string;
 }
 
-export interface FrontendMeResponse {
+export interface AuthMeResponse {
   user_id: string;
 }
 
-export interface FrontendRefreshResponse {
+export interface AuthRefreshResponse {
   access_token: string;
 
   user_id: string;
 }
 
-export interface FrontendRegisterResponse {
+export interface AuthRegisterResponse {
   message: string;
 
   user_id: string;
 }
 
-export interface FrontendResetPasswordResponse {
+export interface AuthResetPasswordResponse {
   message: string;
 }
 
-export interface FrontendVerifyEmailResponse {
+export interface AuthVerifyEmailResponse {
   message: string;
 }
 
-export interface FrontendForgotPasswordParams {
+export interface AuthForgotPasswordParams {
   email: string;
 }
 
-export interface FrontendLoginParams {
+export interface AuthLoginParams {
   email: string;
 
   password: string;
 }
 
-export interface FrontendRegisterParams {
+export interface AuthRegisterParams {
   email: string;
 
   password: string;
 }
 
-export interface FrontendResetPasswordParams {
+export interface AuthResetPasswordParams {
   token: string;
 
   new_password: string;
 }
 
-export interface FrontendVerifyEmailParams {
+export interface AuthVerifyEmailParams {
   token: string;
 }
 
-export declare namespace Frontend {
+export declare namespace Auth {
   export {
-    type FrontendForgotPasswordResponse as FrontendForgotPasswordResponse,
-    type FrontendLoginResponse as FrontendLoginResponse,
-    type FrontendLogoutResponse as FrontendLogoutResponse,
-    type FrontendMeResponse as FrontendMeResponse,
-    type FrontendRefreshResponse as FrontendRefreshResponse,
-    type FrontendRegisterResponse as FrontendRegisterResponse,
-    type FrontendResetPasswordResponse as FrontendResetPasswordResponse,
-    type FrontendVerifyEmailResponse as FrontendVerifyEmailResponse,
-    type FrontendForgotPasswordParams as FrontendForgotPasswordParams,
-    type FrontendLoginParams as FrontendLoginParams,
-    type FrontendRegisterParams as FrontendRegisterParams,
-    type FrontendResetPasswordParams as FrontendResetPasswordParams,
-    type FrontendVerifyEmailParams as FrontendVerifyEmailParams,
+    type AuthForgotPasswordResponse as AuthForgotPasswordResponse,
+    type AuthLoginResponse as AuthLoginResponse,
+    type AuthLogoutResponse as AuthLogoutResponse,
+    type AuthMeResponse as AuthMeResponse,
+    type AuthRefreshResponse as AuthRefreshResponse,
+    type AuthRegisterResponse as AuthRegisterResponse,
+    type AuthResetPasswordResponse as AuthResetPasswordResponse,
+    type AuthVerifyEmailResponse as AuthVerifyEmailResponse,
+    type AuthForgotPasswordParams as AuthForgotPasswordParams,
+    type AuthLoginParams as AuthLoginParams,
+    type AuthRegisterParams as AuthRegisterParams,
+    type AuthResetPasswordParams as AuthResetPasswordParams,
+    type AuthVerifyEmailParams as AuthVerifyEmailParams,
   };
 }
