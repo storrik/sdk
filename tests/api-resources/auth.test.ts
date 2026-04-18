@@ -13,7 +13,10 @@ const client = new Storrik({
 describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('forgotPassword: only required params', async () => {
-    const responsePromise = client.auth.forgotPassword({ email: 'test@storrik.com' });
+    const responsePromise = client.auth.forgotPassword({
+      captcha_token: '03AFcWeA...',
+      email: 'test@storrik.com',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,12 +28,19 @@ describe('resource auth', () => {
 
   // Mock server tests are disabled
   test.skip('forgotPassword: required and optional params', async () => {
-    const response = await client.auth.forgotPassword({ email: 'test@storrik.com' });
+    const response = await client.auth.forgotPassword({
+      captcha_token: '03AFcWeA...',
+      email: 'test@storrik.com',
+    });
   });
 
   // Mock server tests are disabled
   test.skip('login: only required params', async () => {
-    const responsePromise = client.auth.login({ email: 'test@storrik.com', password: 'supersecurepassword' });
+    const responsePromise = client.auth.login({
+      captcha_token: '03AFcWeA...',
+      email: 'test@storrik.com',
+      password: 'supersecurepassword',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,7 +52,11 @@ describe('resource auth', () => {
 
   // Mock server tests are disabled
   test.skip('login: required and optional params', async () => {
-    const response = await client.auth.login({ email: 'test@storrik.com', password: 'supersecurepassword' });
+    const response = await client.auth.login({
+      captcha_token: '03AFcWeA...',
+      email: 'test@storrik.com',
+      password: 'supersecurepassword',
+    });
   });
 
   // Mock server tests are disabled
@@ -84,6 +98,7 @@ describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('register: only required params', async () => {
     const responsePromise = client.auth.register({
+      captcha_token: '03AFcWeA...',
       email: 'test@storrik.com',
       password: 'supersecurepassword',
     });
@@ -99,6 +114,7 @@ describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('register: required and optional params', async () => {
     const response = await client.auth.register({
+      captcha_token: '03AFcWeA...',
       email: 'test@storrik.com',
       password: 'supersecurepassword',
     });
@@ -106,10 +122,7 @@ describe('resource auth', () => {
 
   // Mock server tests are disabled
   test.skip('resetPassword: only required params', async () => {
-    const responsePromise = client.auth.resetPassword({
-      token: 'reset_token_here',
-      new_password: 'newpassword123',
-    });
+    const responsePromise = client.auth.resetPassword({ token: 'token', new_password: 'newpassword123' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,15 +134,12 @@ describe('resource auth', () => {
 
   // Mock server tests are disabled
   test.skip('resetPassword: required and optional params', async () => {
-    const response = await client.auth.resetPassword({
-      token: 'reset_token_here',
-      new_password: 'newpassword123',
-    });
+    const response = await client.auth.resetPassword({ token: 'token', new_password: 'newpassword123' });
   });
 
   // Mock server tests are disabled
   test.skip('verifyEmail: only required params', async () => {
-    const responsePromise = client.auth.verifyEmail({ token: 'email_token_here' });
+    const responsePromise = client.auth.verifyEmail({ token: 'email_token' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -141,6 +151,6 @@ describe('resource auth', () => {
 
   // Mock server tests are disabled
   test.skip('verifyEmail: required and optional params', async () => {
-    const response = await client.auth.verifyEmail({ token: 'email_token_here' });
+    const response = await client.auth.verifyEmail({ token: 'email_token' });
   });
 });

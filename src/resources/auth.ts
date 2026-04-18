@@ -8,9 +8,12 @@ export class Auth extends APIResource {
   /**
    * Sends a password reset email if the email exists. Always returns success.
    *
+   * **Rate limit:** 3 requests per minute.
+   *
    * @example
    * ```ts
    * const response = await client.auth.forgotPassword({
+   *   captcha_token: '03AFcWeA...',
    *   email: 'test@storrik.com',
    * });
    * ```
@@ -26,11 +29,12 @@ export class Auth extends APIResource {
    * Logs a user in and creates a session.
    *
    * Returns an access token in the response body and sets an HttpOnly refresh
-   * cookie.
+   * cookie. **Rate limit:** 5 requests per minute .
    *
    * @example
    * ```ts
    * const response = await client.auth.login({
+   *   captcha_token: '03AFcWeA...',
    *   email: 'test@storrik.com',
    *   password: 'supersecurepassword',
    * });
@@ -67,6 +71,8 @@ export class Auth extends APIResource {
   /**
    * Rotates the refresh token and issues a new access token.
    *
+   * **Rate limit:** 20 requests per minute.
+   *
    * @example
    * ```ts
    * const response = await client.auth.refresh();
@@ -79,9 +85,12 @@ export class Auth extends APIResource {
   /**
    * Creates an account and sends a verification email.
    *
+   * **Rate limit:** 3 requests per minute.
+   *
    * @example
    * ```ts
    * const response = await client.auth.register({
+   *   captcha_token: '03AFcWeA...',
    *   email: 'test@storrik.com',
    *   password: 'supersecurepassword',
    * });
@@ -94,16 +103,12 @@ export class Auth extends APIResource {
   /**
    * Resets a user's password using a reset token.
    *
-   * Side effects:
-   *
-   * - updates password
-   * - revokes all sessions
-   * - clears refresh cookie
+   * **Rate limit:** 10 requests per minute.
    *
    * @example
    * ```ts
    * const response = await client.auth.resetPassword({
-   *   token: 'reset_token_here',
+   *   token: 'token',
    *   new_password: 'newpassword123',
    * });
    * ```
@@ -118,10 +123,12 @@ export class Auth extends APIResource {
   /**
    * Verifies a user's email using an email verification token.
    *
+   * **Rate limit:** 10 requests per minute.
+   *
    * @example
    * ```ts
    * const response = await client.auth.verifyEmail({
-   *   token: 'email_token_here',
+   *   token: 'email_token',
    * });
    * ```
    */
@@ -137,13 +144,11 @@ export interface AuthForgotPasswordResponse {
 export interface AuthLoginResponse {
   access_token: string;
 
-  email_verified: boolean;
-
-  user_id: string;
+  ok: string;
 }
 
 export interface AuthLogoutResponse {
-  message: string;
+  ok: string;
 }
 
 export interface AuthMeResponse {
@@ -152,35 +157,46 @@ export interface AuthMeResponse {
 
 export interface AuthRefreshResponse {
   access_token: string;
-
-  user_id: string;
 }
 
 export interface AuthRegisterResponse {
-  message: string;
-
-  user_id: string;
+  ok: string;
 }
 
 export interface AuthResetPasswordResponse {
-  message: string;
+  ok: string;
 }
 
 export interface AuthVerifyEmailResponse {
-  message: string;
+  ok: string;
 }
 
 export interface AuthForgotPasswordParams {
+  /**
+   * Token returned from CAPTCHA
+   */
+  captcha_token: string;
+
   email: string;
 }
 
 export interface AuthLoginParams {
+  /**
+   * Token returned from CAPTCHA
+   */
+  captcha_token: string;
+
   email: string;
 
   password: string;
 }
 
 export interface AuthRegisterParams {
+  /**
+   * Token returned from CAPTCHA
+   */
+  captcha_token: string;
+
   email: string;
 
   password: string;

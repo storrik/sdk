@@ -27,11 +27,12 @@ const client = new Storrik({
 });
 
 const response = await client.auth.login({
+  captcha_token: '03AFcWeA...',
   email: 'nate@storrik.com',
   password: 'supersecurepassword',
 });
 
-console.log(response.user_id);
+console.log(response.access_token);
 ```
 
 ### Request & Response types
