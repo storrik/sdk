@@ -92,6 +92,7 @@ export class Auth extends APIResource {
    * const response = await client.auth.register({
    *   captcha_token: '03AFcWeA...',
    *   email: 'test@storrik.com',
+   *   fullname: 'John Doe',
    *   password: 'supersecurepassword',
    * });
    * ```
@@ -198,6 +199,8 @@ export interface AuthRegisterParams {
   captcha_token: string;
 
   email: string;
+
+  fullname: string;
 
   password: string;
 }
