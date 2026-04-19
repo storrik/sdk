@@ -100,6 +100,7 @@ describe('resource auth', () => {
     const responsePromise = client.auth.register({
       captcha_token: '03AFcWeA...',
       email: 'test@storrik.com',
+      fullname: 'John Doe',
       password: 'supersecurepassword',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -116,6 +117,7 @@ describe('resource auth', () => {
     const response = await client.auth.register({
       captcha_token: '03AFcWeA...',
       email: 'test@storrik.com',
+      fullname: 'John Doe',
       password: 'supersecurepassword',
     });
   });
