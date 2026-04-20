@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.17.0 (2026-04-20)
+
+Full Changelog: [v1.16.0...v1.17.0](https://github.com/storrik/sdk/compare/v1.16.0...v1.17.0)
+
+### Features
+
+* **api:** manual updates ([26d736d](https://github.com/storrik/sdk/commit/26d736dcb1e44747780f06902705d8a3f3495f23))
+
 ## 1.16.0 (2026-04-20)
 
 Full Changelog: [v1.15.0...v1.16.0](https://github.com/storrik/sdk/compare/v1.15.0...v1.16.0)
