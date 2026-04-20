@@ -311,31 +311,6 @@ export class Storrik {
     return;
   }
 
-  protected async authHeaders(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([
-      await this.apiKeyAuth(opts),
-      await this.publishableKeyAuth(opts),
-      await this.accessTokenAuth(opts),
-      await this.customerSessionAuth(opts),
-    ]);
-  }
-
-  protected async apiKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: this.apiKey }]);
-  }
-
-  protected async publishableKeyAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: this.publishableKey }]);
-  }
-
-  protected async accessTokenAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ Authorization: `Bearer ${this.accessToken}` }]);
-  }
-
-  protected async customerSessionAuth(opts: FinalRequestOptions): Promise<NullableHeaders | undefined> {
-    return buildHeaders([{ 'x-customer-authorization': this.customerSessionToken }]);
-  }
-
   /**
    * Basic re-implementation of `qs.stringify` for primitive types.
    */
@@ -762,7 +737,6 @@ export class Storrik {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
       },
-      await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
       options.headers,
