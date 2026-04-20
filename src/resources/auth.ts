@@ -57,18 +57,6 @@ export class Auth extends APIResource {
   }
 
   /**
-   * Returns the currently authenticated user.
-   *
-   * @example
-   * ```ts
-   * const response = await client.auth.me();
-   * ```
-   */
-  me(options?: RequestOptions): APIPromise<AuthMeResponse> {
-    return this._client.get('/me', options);
-  }
-
-  /**
    * Rotates the refresh token and issues a new access token.
    *
    * **Rate limit:** 20 requests per minute.
@@ -149,11 +137,7 @@ export interface AuthLoginResponse {
 }
 
 export interface AuthLogoutResponse {
-  ok: string;
-}
-
-export interface AuthMeResponse {
-  user_id: string;
+  ok: boolean;
 }
 
 export interface AuthRefreshResponse {
@@ -161,15 +145,17 @@ export interface AuthRefreshResponse {
 }
 
 export interface AuthRegisterResponse {
+  access_token: string;
+
   ok: string;
 }
 
 export interface AuthResetPasswordResponse {
-  ok: string;
+  ok: boolean;
 }
 
 export interface AuthVerifyEmailResponse {
-  ok: string;
+  ok: boolean;
 }
 
 export interface AuthForgotPasswordParams {
@@ -220,7 +206,6 @@ export declare namespace Auth {
     type AuthForgotPasswordResponse as AuthForgotPasswordResponse,
     type AuthLoginResponse as AuthLoginResponse,
     type AuthLogoutResponse as AuthLogoutResponse,
-    type AuthMeResponse as AuthMeResponse,
     type AuthRefreshResponse as AuthRefreshResponse,
     type AuthRegisterResponse as AuthRegisterResponse,
     type AuthResetPasswordResponse as AuthResetPasswordResponse,

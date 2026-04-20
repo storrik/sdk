@@ -5,7 +5,6 @@ export {
   type AuthForgotPasswordResponse,
   type AuthLoginResponse,
   type AuthLogoutResponse,
-  type AuthMeResponse,
   type AuthRefreshResponse,
   type AuthRegisterResponse,
   type AuthResetPasswordResponse,
