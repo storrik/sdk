@@ -57,6 +57,18 @@ export class Auth extends APIResource {
   }
 
   /**
+   * Returns whether the current request has a valid authenticated session.
+   *
+   * @example
+   * ```ts
+   * const response = await client.auth.me();
+   * ```
+   */
+  me(options?: RequestOptions): APIPromise<AuthMeResponse> {
+    return this._client.get('/auth/session', options);
+  }
+
+  /**
    * Rotates the refresh token and issues a new access token.
    *
    * **Rate limit:** 20 requests per minute.
@@ -140,6 +152,10 @@ export interface AuthLogoutResponse {
   ok: boolean;
 }
 
+export interface AuthMeResponse {
+  ok: boolean;
+}
+
 export interface AuthRefreshResponse {
   access_token: string;
 }
@@ -206,6 +222,7 @@ export declare namespace Auth {
     type AuthForgotPasswordResponse as AuthForgotPasswordResponse,
     type AuthLoginResponse as AuthLoginResponse,
     type AuthLogoutResponse as AuthLogoutResponse,
+    type AuthMeResponse as AuthMeResponse,
     type AuthRefreshResponse as AuthRefreshResponse,
     type AuthRegisterResponse as AuthRegisterResponse,
     type AuthResetPasswordResponse as AuthResetPasswordResponse,
