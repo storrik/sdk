@@ -23,6 +23,10 @@ The full API of this library can be found in [api.md](api.md).
 import Storrik from 'storrik';
 
 const client = new Storrik({
+  apiKey: 'My API Key',
+  publishableKey: 'My Publishable Key',
+  accessToken: 'My Access Token',
+  customerSessionToken: 'My Customer Session Token',
   environment: 'development', // or 'production' | 'beta'; defaults to 'production'
 });
 
@@ -44,7 +48,10 @@ This library includes TypeScript definitions for all request params and response
 import Storrik from 'storrik';
 
 const client = new Storrik({
-  apiKey: process.env['STORRIK_API_KEY'], // This is the default and can be omitted
+  apiKey: 'My API Key',
+  publishableKey: 'My Publishable Key',
+  accessToken: 'My Access Token',
+  customerSessionToken: 'My Customer Session Token',
   environment: 'development', // or 'production' | 'beta'; defaults to 'production'
 });
 
@@ -100,6 +107,10 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Storrik({
+  apiKey: 'My API Key',
+  publishableKey: 'My Publishable Key',
+  accessToken: 'My Access Token',
+  customerSessionToken: 'My Customer Session Token',
   maxRetries: 0, // default is 2
 });
 
@@ -117,6 +128,10 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Storrik({
+  apiKey: 'My API Key',
+  publishableKey: 'My Publishable Key',
+  accessToken: 'My Access Token',
+  customerSessionToken: 'My Customer Session Token',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
