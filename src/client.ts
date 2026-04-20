@@ -17,6 +17,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { AccountCreateParams, AccountCreateResponse, Accounts } from './resources/accounts';
 import {
   Auth,
   AuthForgotPasswordParams,
@@ -24,6 +25,7 @@ import {
   AuthLoginParams,
   AuthLoginResponse,
   AuthLogoutResponse,
+  AuthMeResponse,
   AuthRefreshResponse,
   AuthRegisterParams,
   AuthRegisterResponse,
@@ -842,11 +844,13 @@ export class Storrik {
   static toFile = Uploads.toFile;
 
   auth: API.Auth = new API.Auth(this);
+  accounts: API.Accounts = new API.Accounts(this);
   payments: API.Payments = new API.Payments(this);
   customer: API.Customer = new API.Customer(this);
 }
 
 Storrik.Auth = Auth;
+Storrik.Accounts = Accounts;
 Storrik.Payments = Payments;
 Storrik.Customer = Customer;
 
@@ -858,6 +862,7 @@ export declare namespace Storrik {
     type AuthForgotPasswordResponse as AuthForgotPasswordResponse,
     type AuthLoginResponse as AuthLoginResponse,
     type AuthLogoutResponse as AuthLogoutResponse,
+    type AuthMeResponse as AuthMeResponse,
     type AuthRefreshResponse as AuthRefreshResponse,
     type AuthRegisterResponse as AuthRegisterResponse,
     type AuthResetPasswordResponse as AuthResetPasswordResponse,
@@ -867,6 +872,12 @@ export declare namespace Storrik {
     type AuthRegisterParams as AuthRegisterParams,
     type AuthResetPasswordParams as AuthResetPasswordParams,
     type AuthVerifyEmailParams as AuthVerifyEmailParams,
+  };
+
+  export {
+    Accounts as Accounts,
+    type AccountCreateResponse as AccountCreateResponse,
+    type AccountCreateParams as AccountCreateParams,
   };
 
   export {

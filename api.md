@@ -5,6 +5,7 @@ Types:
 - <code><a href="./src/resources/auth.ts">AuthForgotPasswordResponse</a></code>
 - <code><a href="./src/resources/auth.ts">AuthLoginResponse</a></code>
 - <code><a href="./src/resources/auth.ts">AuthLogoutResponse</a></code>
+- <code><a href="./src/resources/auth.ts">AuthMeResponse</a></code>
 - <code><a href="./src/resources/auth.ts">AuthRefreshResponse</a></code>
 - <code><a href="./src/resources/auth.ts">AuthRegisterResponse</a></code>
 - <code><a href="./src/resources/auth.ts">AuthResetPasswordResponse</a></code>
@@ -15,10 +16,21 @@ Methods:
 - <code title="post /auth/forgot-password">client.auth.<a href="./src/resources/auth.ts">forgotPassword</a>({ ...params }) -> AuthForgotPasswordResponse</code>
 - <code title="post /auth/login">client.auth.<a href="./src/resources/auth.ts">login</a>({ ...params }) -> AuthLoginResponse</code>
 - <code title="post /auth/logout">client.auth.<a href="./src/resources/auth.ts">logout</a>() -> AuthLogoutResponse</code>
+- <code title="get /auth/session">client.auth.<a href="./src/resources/auth.ts">me</a>() -> AuthMeResponse</code>
 - <code title="post /auth/refresh">client.auth.<a href="./src/resources/auth.ts">refresh</a>() -> AuthRefreshResponse</code>
 - <code title="post /auth/register">client.auth.<a href="./src/resources/auth.ts">register</a>({ ...params }) -> AuthRegisterResponse</code>
 - <code title="post /auth/reset-password">client.auth.<a href="./src/resources/auth.ts">resetPassword</a>({ ...params }) -> AuthResetPasswordResponse</code>
 - <code title="post /auth/verify-email">client.auth.<a href="./src/resources/auth.ts">verifyEmail</a>({ ...params }) -> AuthVerifyEmailResponse</code>
+
+# Accounts
+
+Types:
+
+- <code><a href="./src/resources/accounts.ts">AccountCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /accounts/create">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> AccountCreateResponse</code>
 
 # Payments
 
