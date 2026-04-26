@@ -61,6 +61,6 @@ export interface AccountCreateParams {
 export declare namespace Accounts {
   export {
     type AccountCreateResponse as AccountCreateResponse,
-    type AccountCreateParams as AccountCreateParams,
+    type AccountCreateParams as AccountCreateParams
   };
 }
