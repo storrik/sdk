@@ -7,16 +7,13 @@ const client = new Storrik({
   publishableKey: 'My Publishable Key',
   accessToken: 'My Access Token',
   customerSessionToken: 'My Customer Session Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('forgotPassword: only required params', async () => {
-    const responsePromise = client.auth.forgotPassword({
-      captcha_token: '03AFcWeA...',
-      email: 'test@storrik.com',
-    });
+    const responsePromise = client.auth.forgotPassword({ captcha_token: '03AFcWeA...', email: 'test@storrik.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -28,19 +25,16 @@ describe('resource auth', () => {
 
   // Mock server tests are disabled
   test.skip('forgotPassword: required and optional params', async () => {
-    const response = await client.auth.forgotPassword({
-      captcha_token: '03AFcWeA...',
-      email: 'test@storrik.com',
-    });
+    const response = await client.auth.forgotPassword({ captcha_token: '03AFcWeA...', email: 'test@storrik.com' });
   });
 
   // Mock server tests are disabled
   test.skip('login: only required params', async () => {
     const responsePromise = client.auth.login({
-      captcha_token: '03AFcWeA...',
-      email: 'test@storrik.com',
-      password: 'supersecurepassword',
-    });
+    captcha_token: '03AFcWeA...',
+    email: 'test@storrik.com',
+    password: 'supersecurepassword',
+  });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -53,10 +47,10 @@ describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('login: required and optional params', async () => {
     const response = await client.auth.login({
-      captcha_token: '03AFcWeA...',
-      email: 'test@storrik.com',
-      password: 'supersecurepassword',
-    });
+    captcha_token: '03AFcWeA...',
+    email: 'test@storrik.com',
+    password: 'supersecurepassword',
+  });
   });
 
   // Mock server tests are disabled
@@ -98,11 +92,11 @@ describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('register: only required params', async () => {
     const responsePromise = client.auth.register({
-      captcha_token: '03AFcWeA...',
-      email: 'test@storrik.com',
-      fullname: 'John Doe',
-      password: 'supersecurepassword',
-    });
+    captcha_token: '03AFcWeA...',
+    email: 'test@storrik.com',
+    fullname: 'John Doe',
+    password: 'supersecurepassword',
+  });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -115,11 +109,11 @@ describe('resource auth', () => {
   // Mock server tests are disabled
   test.skip('register: required and optional params', async () => {
     const response = await client.auth.register({
-      captcha_token: '03AFcWeA...',
-      email: 'test@storrik.com',
-      fullname: 'John Doe',
-      password: 'supersecurepassword',
-    });
+    captcha_token: '03AFcWeA...',
+    email: 'test@storrik.com',
+    fullname: 'John Doe',
+    password: 'supersecurepassword',
+  });
   });
 
   // Mock server tests are disabled

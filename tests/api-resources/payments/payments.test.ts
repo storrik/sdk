@@ -7,7 +7,7 @@ const client = new Storrik({
   publishableKey: 'My Publishable Key',
   accessToken: 'My Access Token',
   customerSessionToken: 'My Customer Session Token',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+  baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010',
 });
 
 describe('resource payments', () => {
@@ -26,16 +26,16 @@ describe('resource payments', () => {
   // Mock server tests are disabled
   test.skip('createIntent: required and optional params', async () => {
     const response = await client.payments.createIntent({
-      amount: 50,
-      currency: 'USD',
-      cancel_url: 'https://example.com',
-      country: 'xx',
-      email: 'dev@stainless.com',
-      metadata: { foo: 'bar' },
-      method: 'card',
-      product_id: 'product_id',
-      success_url: 'https://example.com',
-      type: 'embed',
-    });
+    amount: 50,
+    currency: 'USD',
+    cancel_url: 'https://example.com',
+    country: 'xx',
+    email: 'dev@stainless.com',
+    metadata: { foo: 'bar' },
+    method: 'card',
+    product_id: 'product_id',
+    success_url: 'https://example.com',
+    type: 'embed',
+  });
   });
 });

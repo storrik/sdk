@@ -36,5 +36,7 @@ export interface TransactionClientResponse {
 }
 
 export declare namespace Transactions {
-  export { type TransactionClientResponse as TransactionClientResponse };
+  export {
+    type TransactionClientResponse as TransactionClientResponse
+  };
 }
