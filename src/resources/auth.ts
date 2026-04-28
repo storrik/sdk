@@ -18,7 +18,10 @@ export class Auth extends APIResource {
    * });
    * ```
    */
-  forgotPassword(body: AuthForgotPasswordParams, options?: RequestOptions): APIPromise<AuthForgotPasswordResponse> {
+  forgotPassword(
+    body: AuthForgotPasswordParams,
+    options?: RequestOptions,
+  ): APIPromise<AuthForgotPasswordResponse> {
     return this._client.post('/auth/forgot-password', { body, ...options });
   }
 
@@ -111,7 +114,10 @@ export class Auth extends APIResource {
    * });
    * ```
    */
-  resetPassword(body: AuthResetPasswordParams, options?: RequestOptions): APIPromise<AuthResetPasswordResponse> {
+  resetPassword(
+    body: AuthResetPasswordParams,
+    options?: RequestOptions,
+  ): APIPromise<AuthResetPasswordResponse> {
     return this._client.post('/auth/reset-password', { body, ...options });
   }
 
@@ -225,6 +231,6 @@ export declare namespace Auth {
     type AuthLoginParams as AuthLoginParams,
     type AuthRegisterParams as AuthRegisterParams,
     type AuthResetPasswordParams as AuthResetPasswordParams,
-    type AuthVerifyEmailParams as AuthVerifyEmailParams
+    type AuthVerifyEmailParams as AuthVerifyEmailParams,
   };
 }

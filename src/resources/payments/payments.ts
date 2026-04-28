@@ -18,7 +18,10 @@ export class Payments extends APIResource {
    *   checkout URL.
    * - If `type` is `embed`, it returns a client secret for embedded flows.
    */
-  createIntent(body: PaymentCreateIntentParams, options?: RequestOptions): APIPromise<PaymentCreateIntentResponse> {
+  createIntent(
+    body: PaymentCreateIntentParams,
+    options?: RequestOptions,
+  ): APIPromise<PaymentCreateIntentResponse> {
     return this._client.post('/v1/payments/intents', { body, ...options });
   }
 }
@@ -87,11 +90,8 @@ Payments.Transactions = Transactions;
 export declare namespace Payments {
   export {
     type PaymentCreateIntentResponse as PaymentCreateIntentResponse,
-    type PaymentCreateIntentParams as PaymentCreateIntentParams
+    type PaymentCreateIntentParams as PaymentCreateIntentParams,
   };
 
-  export {
-    Transactions as Transactions,
-    type TransactionClientResponse as TransactionClientResponse
-  };
+  export { Transactions as Transactions, type TransactionClientResponse as TransactionClientResponse };
 }
