@@ -36,7 +36,10 @@ export class Customer extends APIResource {
    *
    * If successful, returns a customer session token.
    */
-  verifyLogin(body: CustomerVerifyLoginParams, options?: RequestOptions): APIPromise<CustomerVerifyLoginResponse> {
+  verifyLogin(
+    body: CustomerVerifyLoginParams,
+    options?: RequestOptions,
+  ): APIPromise<CustomerVerifyLoginResponse> {
     return this._client.post('/v1/customer/login/verify', { body, ...options });
   }
 }
@@ -103,6 +106,6 @@ export declare namespace Customer {
     type CustomerMeResponse as CustomerMeResponse,
     type CustomerVerifyLoginResponse as CustomerVerifyLoginResponse,
     type CustomerLoginParams as CustomerLoginParams,
-    type CustomerVerifyLoginParams as CustomerVerifyLoginParams
+    type CustomerVerifyLoginParams as CustomerVerifyLoginParams,
   };
 }
