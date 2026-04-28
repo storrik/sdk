@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.18.0 (2026-04-28)
+
+Full Changelog: [v1.17.0...v1.18.0](https://github.com/storrik/sdk/compare/v1.17.0...v1.18.0)
+
+### Features
+
+* support setting headers via env ([ea43b13](https://github.com/storrik/sdk/commit/ea43b1318fc0b568fffa315efcd4b92ffbf7b3a4))
+
+
+### Chores
+
+* **formatter:** run prettier and eslint separately ([0f22d39](https://github.com/storrik/sdk/commit/0f22d3963e535fe2a687eb243085cc22dde2ba98))
+* **internal:** codegen related update ([4a33ba0](https://github.com/storrik/sdk/commit/4a33ba0cd61fd1fb661c79774b97d20c7b895d65))
+* **internal:** more robust bootstrap script ([e90ea8c](https://github.com/storrik/sdk/commit/e90ea8cc3ef7dec092490f2764ff4e0bf2a4a78c))
+
 ## 1.17.0 (2026-04-20)
 
 Full Changelog: [v1.16.0...v1.17.0](https://github.com/storrik/sdk/compare/v1.16.0...v1.17.0)
