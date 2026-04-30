@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.18.1 (2026-04-30)
+
+Full Changelog: [v1.18.0...v1.18.1](https://github.com/storrik/sdk/compare/v1.18.0...v1.18.1)
+
+### Chores
+
+* **format:** run eslint and prettier separately ([85b96bb](https://github.com/storrik/sdk/commit/85b96bbac501ae974ca4778ac7bab832d0e64480))
+
 ## 1.18.0 (2026-04-28)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/storrik/sdk/compare/v1.17.0...v1.18.0)
