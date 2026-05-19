@@ -1,7 +1,6 @@
 import fs from 'fs';
 import type { ResponseLike } from 'storrik/internal/to-file';
 import { toFile } from 'storrik/core/uploads';
-import { File } from 'node:buffer';
 
 class MyClass {
   name: string = 'foo';
