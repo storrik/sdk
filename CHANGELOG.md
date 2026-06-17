@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.18.1 (2026-06-17)
+
+Full Changelog: [v1.18.0...v1.18.1](https://github.com/storrik/sdk/compare/v1.18.0...v1.18.1)
+
+### Bug Fixes
+
+* **client:** send content-type header for requests with an omitted optional body ([5c1fdad](https://github.com/storrik/sdk/commit/5c1fdad24aae59cd672b24a50d720cbc1f943a0c))
+* **typescript:** upgrade tsc-multi so that it works with Node 26 ([b829892](https://github.com/storrik/sdk/commit/b829892e6837644f7df1aae82342877050458eb8))
+
+
+### Chores
+
+* **format:** run eslint and prettier separately ([85b96bb](https://github.com/storrik/sdk/commit/85b96bbac501ae974ca4778ac7bab832d0e64480))
+* redact api-key headers in debug logs ([581df7e](https://github.com/storrik/sdk/commit/581df7eb7d84830ccc6170442864caff1d6b639d))
+* **tests:** remove redundant File import ([f8e4aa5](https://github.com/storrik/sdk/commit/f8e4aa562bc7a12cfda4ff958ae46a0a98c1cce5))
+
 ## 1.18.0 (2026-04-28)
 
 Full Changelog: [v1.17.0...v1.18.0](https://github.com/storrik/sdk/compare/v1.17.0...v1.18.0)
